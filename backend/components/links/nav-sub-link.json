@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_links_nav_sub_links",
+  "info": {
+    "name": "Nav Sub Link",
+    "icon": "angle-down"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "new_tab": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
