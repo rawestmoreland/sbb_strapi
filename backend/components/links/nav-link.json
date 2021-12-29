@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_links_nav_links",
+  "info": {
+    "name": "nav-link",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "new_tab": {
+      "type": "boolean",
+      "default": false
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

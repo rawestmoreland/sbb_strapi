@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_nav_nav_links",
+  "info": {
+    "name": "nav-link",
+    "icon": "ad"
+  },
+  "options": {},
+  "attributes": {
+    "main_link": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.nav-link"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_nav_navbars",
+  "info": {
+    "name": "navbar",
+    "icon": "compass"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}
