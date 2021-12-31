@@ -116,3 +116,6 @@ build
 
 # Local Netlify folder
 .netlify
+
+# Heroku needs this ignored
+backend/package-lock.json
