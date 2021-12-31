@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
 	return (
 		<>
 			<NavBar navbar={navbar} />
-			<div className='container font-poppins py-8'>{children}</div>
+			<div className='container font-poppins py-12'>{children}</div>
 			{/* {footer && <Footer footer={footer} />} */}
 		</>
 	)
