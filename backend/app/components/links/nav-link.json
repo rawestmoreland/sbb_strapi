@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_links_nav_links",
+  "info": {
+    "name": "NavLink",
+    "icon": "angle-double-down"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "links.link"
+    },
+    "submenu": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.link"
+    }
+  }
+}

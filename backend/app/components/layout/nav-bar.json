@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_layout_nav_bars",
+  "info": {
+    "name": "NavBar",
+    "icon": "map",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.link"
+    },
+    "logo": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": ["images"],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

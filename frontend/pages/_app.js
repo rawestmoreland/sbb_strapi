@@ -10,12 +10,13 @@ export const GlobalContext = createContext({})
 
 function MyApp({ Component, pageProps }) {
 	const { global } = pageProps
-	const faviconUrl = global.favicon ? getStrapiMedia(global.favicon) : ''
-	console.log(pageProps)
 	return (
 		<>
 			<Head>
-				<link rel='shortcut icon' href={faviconUrl} />
+				<link
+					rel='shortcut icon'
+					href={getStrapiMedia(global.favicon.url)}
+				/>
 			</Head>
 			<GlobalContext.Provider value={global}>
 				<Component {...pageProps} />

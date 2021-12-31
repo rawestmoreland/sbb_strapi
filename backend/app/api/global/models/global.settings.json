@@ -1,0 +1,44 @@
+{
+  "kind": "singleType",
+  "collectionName": "globals",
+  "info": {
+    "name": "global",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metadata": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo",
+      "required": true
+    },
+    "metaTitleSuffix": {
+      "type": "string"
+    },
+    "favicon": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "navbar": {
+      "type": "component",
+      "repeatable": false,
+      "component": "layout.nav-bar"
+    },
+    "siteName": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

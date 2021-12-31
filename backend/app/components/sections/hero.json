@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_sections_heroes",
+  "info": {
+    "name": "hero",
+    "icon": "smile"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

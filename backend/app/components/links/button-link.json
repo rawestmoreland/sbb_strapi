@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_links_button_links",
+  "info": {
+    "name": "Button-Link",
+    "icon": "fingerprint",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "newTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "text": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["outlined", "filled"],
+      "default": "filled"
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": ["rounded", "rectangular"],
+      "default": "rounded"
+    },
+    "size": {
+      "type": "enumeration",
+      "enum": ["small", "medium", "large", "fit"],
+      "default": "medium"
+    }
+  }
+}
