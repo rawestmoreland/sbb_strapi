@@ -12,3 +12,30 @@
 	display: inline-block;
 	margin-left: 0.5em;
 }
+
+.postContent p {
+	font-size: 1rem;
+	color: #111111;
+	margin: 0 0 1.25rem;
+	text-align: justify;
+}
+
+.postContent a {
+	color: #3870a7;
+	text-decoration: underline;
+}
+
+.postContent h1 {
+	font-size: 2.25rem;
+	margin: 0 0 1.25rem;
+}
+
+.postContent h3 {
+	font-size: 1.7rem;
+	margin: 1.25rem 0;
+}
+
+.postContent h4 {
+	font-size: 1.3rem;
+	margin: 1.25rem 0;
+}
