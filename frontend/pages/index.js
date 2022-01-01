@@ -1,4 +1,4 @@
-import Seo from '../Components/Seo'
+import Seo from '../components/Seo'
 import Layout from '../components/Layout'
 import PostList from '../components/PostList'
 import { fetchAPI } from '../utils/api-helpers'
@@ -6,7 +6,7 @@ import { fetchAPI } from '../utils/api-helpers'
 export default function Home({ posts, categories, homepage }) {
 	return (
 		<Layout>
-			<Seo seo={homepage.seo}></Seo>
+			<Seo seo={homepage.seo} />
 			<div className='flex flex-col'>
 				<PostList posts={posts} />
 			</div>

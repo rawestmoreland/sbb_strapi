@@ -2,8 +2,7 @@ import App from 'next/app'
 import Head from 'next/head'
 import { createContext } from 'react'
 import { fetchAPI, getStrapiMedia } from '../utils/api-helpers'
-
-import 'tailwindcss/tailwind.css'
+import './global.css'
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
