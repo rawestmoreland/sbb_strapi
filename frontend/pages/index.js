@@ -2,6 +2,8 @@ import Seo from '../components/Seo'
 import Layout from '../components/Layout'
 import PostList from '../components/PostList'
 import { fetchAPI } from '../utils/api-helpers'
+import client from '../lib/apollo-client'
+import { GET_ALL_THINGS } from '../utils/graphql-queries'
 
 export default function Home({ posts, categories, homepage }) {
 	return (
@@ -16,14 +18,16 @@ export default function Home({ posts, categories, homepage }) {
 
 export async function getStaticProps() {
 	// Run API calls in parallel
-	const [posts, categories, homepage] = await Promise.all([
-		fetchAPI('/posts'),
-		fetchAPI('/categories'),
-		fetchAPI('/homepage'),
-	])
+	const { data } = await client.query({
+		query: GET_ALL_THINGS,
+	})
 
 	return {
-		props: { posts, categories, homepage },
+		props: {
+			posts: data.posts,
+			categories: data.categories,
+			homepage: data.homepage,
+		},
 		revalidate: 1,
 	}
 }
