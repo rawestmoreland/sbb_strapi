@@ -2,6 +2,8 @@ import PostPreview from './PostPreview'
 import { isPast } from 'date-fns'
 
 const PostList = ({ posts }) => {
+	// Sort the posts by published date
+	posts.sort((a, b) => new Date(b.published) - new Date(a.published))
 	return (
 		<div>
 			<ul className='flex flex-col gap-y-8'>

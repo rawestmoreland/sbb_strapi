@@ -1,5 +1,7 @@
 import ReactMarkdown from 'react-markdown'
 import { format } from 'date-fns'
+import client from '../../lib/apollo-client'
+import gql from 'graphql-tag'
 import { fetchAPI, getStrapiMedia } from '../../utils/api-helpers'
 import Layout from '../../components/Layout'
 import Image from '../../components/Image'
@@ -32,10 +34,20 @@ const Post = ({ post }) => {
 }
 
 export async function getStaticPaths() {
-	const posts = await fetchAPI('/posts')
+	// const posts = await fetchAPI('/posts')
+
+	const { data } = await client.query({
+		query: gql`
+			query {
+				posts {
+					slug
+				}
+			}
+		`,
+	})
 
 	return {
-		paths: posts.map((post) => ({
+		paths: data.posts.map((post) => ({
 			params: {
 				slug: post.slug,
 			},
@@ -46,6 +58,22 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 	const posts = await fetchAPI(`/posts?slug=${params.slug}`)
+
+	// const { data } = await client.query({
+	// 	query: gql`
+	// 		query GetPostsBySlug($slug: String) {
+	// 			posts(slug: $slug) {
+	// 				title
+	// 				content
+	// 			}
+	// 		}
+	// 	`,
+	// 	variables: {
+	// 		slug: params.slug ? params.slug[0] : '',
+	// 	},
+	// })
+
+	// console.log(data)
 
 	return {
 		props: { post: posts[0] },

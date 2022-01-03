@@ -37,10 +37,6 @@
       "via": "posts",
       "model": "authors"
     },
-    "category": {
-      "via": "posts",
-      "model": "categories"
-    },
     "image": {
       "model": "file",
       "via": "related",
@@ -50,6 +46,10 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "categories": {
+      "via": "posts",
+      "collection": "categories"
     }
   }
 }
