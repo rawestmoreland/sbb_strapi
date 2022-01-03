@@ -57,26 +57,34 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	const posts = await fetchAPI(`/posts?slug=${params.slug}`)
-
-	// const { data } = await client.query({
-	// 	query: gql`
-	// 		query GetPostsBySlug($slug: String) {
-	// 			posts(slug: $slug) {
-	// 				title
-	// 				content
-	// 			}
-	// 		}
-	// 	`,
-	// 	variables: {
-	// 		slug: params.slug ? params.slug[0] : '',
-	// 	},
-	// })
-
-	// console.log(data)
+	const { data } = await client.query({
+		query: gql`
+			query GetPostsBySlug($slug: String) {
+				posts(where: { slug: $slug }) {
+					title
+					content
+					description
+					published
+					author {
+						name
+					}
+					image {
+						height
+						width
+						formats
+						alternativeText
+						url
+					}
+				}
+			}
+		`,
+		variables: {
+			slug: params.slug ? params.slug : '',
+		},
+	})
 
 	return {
-		props: { post: posts[0] },
+		props: { post: data.posts[0] },
 		revalidate: 1,
 	}
 }
