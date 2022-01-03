@@ -16,7 +16,7 @@ export default function Home({ posts, categories, homepage }) {
 	)
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	// Run API calls in parallel
 	const { data } = await client.query({
 		query: GET_ALL_THINGS,
@@ -28,6 +28,5 @@ export async function getStaticProps() {
 			categories: data.categories,
 			homepage: data.homepage,
 		},
-		revalidate: 1,
 	}
 }
