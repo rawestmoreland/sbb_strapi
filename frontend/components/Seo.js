@@ -24,7 +24,7 @@ const Seo = ({ seo }) => {
 	return (
 		<NextSeo
 			title={fullSeo.metaTitle || ''}
-			dscription={fullSeo.metaDescription || ''}
+			description={fullSeo.metaDescription || ''}
 			openGraph={{
 				// Title and description are mandatory
 				title: fullSeo.metaTitle || '',
