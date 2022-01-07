@@ -10,10 +10,12 @@ const PostPreview = ({ post }) => {
 				<div className='col-span-1 w-full h-full'>
 					<Image media={image} />
 				</div>
-				<div className='flex flex-col col-span-2'>
-					<h2 className='text-2xl font-bold mb-2'>{post.title}</h2>
-					<p className='mb-2'>{post.description}</p>
-					<p>{format(new Date(post.published), 'LLLL do, yyyy')}</p>
+				<div className='flex flex-col col-span-2 h-full'>
+					<h2 className='text-2xl font-bold mb-4'>{post.title}</h2>
+					<p className='mb-4'>{post.description}</p>
+					<p className='text-gray-600'>
+						{format(new Date(post.published), 'LLLL do, yyyy')}
+					</p>
 				</div>
 			</div>
 		</Link>

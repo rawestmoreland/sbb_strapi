@@ -5,6 +5,32 @@ export function getStrapiURL(path) {
 	}${path}`
 }
 
+export async function fetchBrewfather(path, options = {}) {
+	const authString = `${process.env.BREWFATHER_USER_ID}:${process.env.BREWFATHER_API_KEY}`
+	const encodedAuth = Buffer.from(authString).toString('base64')
+	const defaultOptions = {
+		headers: {
+			'Authorization': `Basic ${encodedAuth}`,
+		},
+	}
+
+	const mergedOptions = {
+		...defaultOptions,
+		...options,
+	}
+	const requestUrl = `${process.env.BREWFATHER_URL}${path}`
+	const response = await fetch(requestUrl, mergedOptions)
+
+	if (!response.ok) {
+		console.error(reponse.statusText)
+		throw new Error(`An error occurred please try again`)
+	}
+
+	const data = await response.json()
+
+	return data
+}
+
 // Helper to make GET requests to Strapi
 export async function fetchAPI(path, options = {}) {
 	const defaultOptions = {
