@@ -6,9 +6,9 @@ import './global.css'
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
-
 function MyApp({ Component, pageProps }) {
 	const { global } = pageProps
+
 	return (
 		<>
 			<Head>
