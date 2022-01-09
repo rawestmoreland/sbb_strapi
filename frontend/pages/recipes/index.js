@@ -2,9 +2,9 @@ import Layout from '../../components/Layout'
 import BatchTable from '../../components/BatchTable'
 import { useRouter } from 'next/router'
 
-const BatchList = ({ batches, page }) => {
+const BatchList = ({ batches, page, more }) => {
 	const router = useRouter()
-	const changePage = (e) => {
+	const nextPage = (e) => {
 		router.push({
 			pathname: '/recipes',
 			query: {
@@ -12,15 +12,34 @@ const BatchList = ({ batches, page }) => {
 			},
 		})
 	}
+	const prevPage = (e) => {
+		router.push({
+			pathname: '/recipes',
+			query: {
+				page: parseInt(page) - 1,
+			},
+		})
+	}
 	return (
 		<Layout>
 			<BatchTable
 				batches={batches}
-				col_labels={['Batch Number', 'Recipe Name']}
+				col_labels={['Batch Number', 'Recipe Name', 'Brew Date']}
 			/>
-			<button className='border rounded p-2' onClick={() => changePage()}>
-				Next Page
-			</button>
+			<div className='flex items-center justify-center w-full mt-4'>
+				<button
+					className={`${page == 1 ? 'hidden' : 'm-2'}`}
+					onClick={() => prevPage()}
+				>
+					<span className='text-4xl'>⬅️</span>
+				</button>
+				<button
+					className={`${!more ? 'hidden' : 'm-2'}`}
+					onClick={() => nextPage()}
+				>
+					<span className='text-4xl'>➡️</span>
+				</button>
+			</div>
 		</Layout>
 	)
 }
@@ -51,7 +70,8 @@ export const getServerSideProps = async ({ query }) => {
 
 	return {
 		props: {
-			batches,
+			batches: batches.data,
+			more: batches.more,
 			page,
 		},
 	}
