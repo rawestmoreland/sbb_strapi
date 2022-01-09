@@ -9,7 +9,7 @@ const Loading = ({ loading }) => {
 					: 'hidden'
 			}`}
 		>
-			<PacmanLoader loading={loading} />
+			<PacmanLoader loading={loading} color='#272727' />
 		</div>
 	)
 }

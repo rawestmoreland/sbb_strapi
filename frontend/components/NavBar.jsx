@@ -8,7 +8,7 @@ const NavBar = ({ navbar }) => {
 	const { title, links } = navbar
 	const [showMobileMenu, setShowMobileMenu] = useState(false)
 	return (
-		<nav className='sticky top-0 flex items-center justify-center w-screen h-16 px-2 md:px-6 bg-white z-50'>
+		<nav className='sticky top-0 flex items-center justify-center w-screen h-16 px-2 md:px-6 bg-white border-b z-50'>
 			<div className='flex align-center w-full justify-between font-poppins'>
 				<div className='flex items-center justify-center'>
 					<Link href='/'>

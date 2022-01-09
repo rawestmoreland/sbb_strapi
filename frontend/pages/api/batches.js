@@ -2,36 +2,67 @@ const axios = require('axios')
 require('dotenv').config()
 const Redis = require('ioredis')
 const { BASE_API_URL } = require('./utils/constants')
+const { fetchFromBrewfather } = require('./utils/brewfather-helpers')
+const redis = new Redis(process.env.REDIS_URL)
 
 export default async function handler(req, res) {
-	const redis = new Redis(process.env.REDIS_URL)
 	const authString = `${process.env.BREWFATHER_USER_ID}:${process.env.BREWFATHER_API_KEY}`
 	const encodedAuth = Buffer.from(authString).toString('base64')
 	const { page, offset, limit } = req.body
+	let more = false
 	try {
 		const cachedData = await redis.get(`batches${page}`)
+		const cachedDataNext = await redis.get(`batches${page + 1}`)
 
 		if (cachedData) {
 			console.log('Returning cached data')
-			return res.status(200).json(cachedData)
+			if (cachedDataNext) {
+				more = true
+			} else if (JSON.parse(cachedData).length === limit) {
+				const nextData = await fetchFromBrewfather(
+					encodedAuth,
+					`/batches?offset=${offset + limit}&limit=${limit}`
+				)
+				if (nextData.length) {
+					more = true
+					redis.set(
+						`batches${page + 1}`,
+						JSON.stringify(nextData),
+						'EX',
+						1800
+					)
+				}
+			}
+			return res.status(200).json({ data: JSON.parse(cachedData), more })
 		}
 
-		const response = await fetch(
-			`${BASE_API_URL}/batches?offset=${offset}&limit=${limit}`,
-			{
-				headers: {
-					'Authorization': `Basic ${encodedAuth}`,
-				},
-			}
+		const batches = await fetchFromBrewfather(
+			encodedAuth,
+			`/batches?offset=${offset}&limit=${limit}`
 		)
 
-		const batches = await response.json()
+		// Check to see if there's another page
+		if (batches.length === limit) {
+			const nextBatches = await fetchFromBrewfather(
+				encodedAuth,
+				`/batches?offset=${offset + limit}&limit=${limit}`
+			)
+			if (nextBatches.length) {
+				redis.set(
+					`batches${page + 1}`,
+					JSON.stringify(nextBatches),
+					'EX',
+					1800
+				)
+				more = true
+			}
+		}
 
-		redis.set(`batches${page}`, JSON.stringify(batches), 'EX', 45)
+		redis.set(`batches${page}`, JSON.stringify(batches), 'EX', 1800)
 
 		console.log('Returning fresh data')
 
-		return res.status(200).json(JSON.stringify(batches))
+		return res.status(200).json({ data: batches, more })
 	} catch (error) {
 		return res.status(500).json({ msg: 'There was an error' })
 	}
