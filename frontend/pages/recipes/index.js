@@ -24,7 +24,12 @@ const BatchList = ({ batches, page, more }) => {
 		<Layout>
 			<BatchTable
 				batches={batches}
-				col_labels={['Batch Number', 'Recipe Name', 'Brew Date']}
+				col_labels={[
+					'Batch Number',
+					'Recipe Name',
+					'Brew Date',
+					'Recipe Link',
+				]}
 			/>
 			<div className='flex items-center justify-center w-full mt-4'>
 				<button

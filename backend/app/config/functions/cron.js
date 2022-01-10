@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Cron config that gives you an opportunity
@@ -11,11 +11,24 @@
  */
 
 module.exports = {
-  /**
-   * Simple example.
-   * Every monday at 1am.
-   */
-  // '0 1 * * 1': () => {
-  //
-  // }
+  // Every 1 minute
+  "*/1 * * * *": async () => {
+    // fetch articles to publish
+    console.log(`looking for things to publish at ${new Date()}`);
+    const draftArticlesToPublish = await strapi.api.post.services.post.find({
+      _publicationState: "preview",
+      published_at_null: true,
+      published_lt: new Date(),
+    });
+
+    await Promise.all(
+      draftArticlesToPublish.map((post) => {
+        console.log(`Publishing ${post.title}`);
+        return strapi.api.post.services.post.update(
+          { id: post.id },
+          { published_at: new Date() }
+        );
+      })
+    );
+  },
 };

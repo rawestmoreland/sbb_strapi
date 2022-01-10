@@ -11,6 +11,7 @@ export default async function handler(req, res) {
 	const { page, offset, limit } = req.body
 	let more = false
 	try {
+		redis.del(`batches${page}`)
 		const cachedData = await redis.get(`batches${page}`)
 		const cachedDataNext = await redis.get(`batches${page + 1}`)
 
@@ -21,7 +22,9 @@ export default async function handler(req, res) {
 			} else if (JSON.parse(cachedData).length === limit) {
 				const nextData = await fetchFromBrewfather(
 					encodedAuth,
-					`/batches?offset=${offset + limit}&limit=${limit}`
+					`/batches?offset=${
+						offset + limit
+					}&limit=${limit}&include=_share`
 				)
 				if (nextData.length) {
 					more = true
@@ -38,14 +41,16 @@ export default async function handler(req, res) {
 
 		const batches = await fetchFromBrewfather(
 			encodedAuth,
-			`/batches?offset=${offset}&limit=${limit}`
+			`/batches?offset=${offset}&limit=${limit}&include=_share`
 		)
 
 		// Check to see if there's another page
 		if (batches.length === limit) {
 			const nextBatches = await fetchFromBrewfather(
 				encodedAuth,
-				`/batches?offset=${offset + limit}&limit=${limit}`
+				`/batches?offset=${
+					offset + limit
+				}&limit=${limit}&include=_share`
 			)
 			if (nextBatches.length) {
 				redis.set(

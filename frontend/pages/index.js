@@ -1,7 +1,6 @@
 import Seo from '../components/Seo'
 import Layout from '../components/Layout'
 import PostList from '../components/PostList'
-import { fetchAPI } from '../utils/api-helpers'
 import client from '../lib/apollo-client'
 import { GET_ALL_THINGS } from '../utils/graphql-queries'
 
