@@ -3,11 +3,16 @@ import { useTable } from 'react-table'
 import { format } from 'date-fns'
 
 const BatchTable = ({ col_labels, batches }) => {
+	console.log(batches)
 	const data = batches.map((r) => {
+		const shareLink = r._share
+			? `https://share.brewfather.app/${r._share}`
+			: ''
 		return {
 			col0: r.batchNo,
 			col1: r.recipe.name,
 			col2: format(new Date(r.brewDate), 'MM/dd/yyyy'),
+			col3: shareLink,
 		}
 	})
 
@@ -17,6 +22,21 @@ const BatchTable = ({ col_labels, batches }) => {
 				return {
 					Header: el,
 					accessor: `col${idx}`,
+					Cell: (e) => {
+						if (e.value.toString().startsWith('http')) {
+							return (
+								<a
+									href={e.value}
+									target='_blank'
+									rel='noopener noreferrer'
+									className='text-blue-400 cursor'
+								>
+									Recipe Link
+								</a>
+							)
+						}
+						return e.value.toString()
+					},
 				}
 			}),
 		[]

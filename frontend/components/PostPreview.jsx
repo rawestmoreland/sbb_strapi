@@ -6,8 +6,8 @@ const PostPreview = ({ post }) => {
 	const { image } = post
 	return (
 		<Link as={`post/${post.slug}`} href='/post/[id]'>
-			<div className='grid grid-cols-3 w-full gap-x-8 cursor-pointer'>
-				<div className='col-span-1 w-full h-full'>
+			<div className='md:grid md:grid-cols-3 w-full md:gap-x-8 cursor-pointer'>
+				<div className='md:col-span-1 w-full h-full mb-2'>
 					<Image media={image} />
 				</div>
 				<div className='flex flex-col col-span-2 h-full'>
