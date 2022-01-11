@@ -18,4 +18,4 @@ I've decided to go with Strapi since it can be self-hosted.
 
 ## TODO
 
-- [] email subscribers when new post is published
+- [ ] email subscribers when new post is published
