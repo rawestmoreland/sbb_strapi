@@ -3,7 +3,6 @@ import { useTable } from 'react-table'
 import { format } from 'date-fns'
 
 const BatchTable = ({ col_labels, batches }) => {
-	console.log(batches)
 	const data = batches.map((r) => {
 		const shareLink = r._share
 			? `https://share.brewfather.app/${r._share}`

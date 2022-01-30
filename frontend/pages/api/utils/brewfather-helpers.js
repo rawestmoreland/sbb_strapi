@@ -14,6 +14,7 @@ export async function fetchFromBrewfather(path, options = {}) {
 		...options,
 	}
 	const requestUrl = `${process.env.BREWFATHER_URL}${path}`
+
 	const response = await fetch(requestUrl, mergedOptions)
 
 	if (!response.ok) {
