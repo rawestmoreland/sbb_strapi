@@ -1,17 +1,12 @@
-const axios = require('axios')
 require('dotenv').config()
 const Redis = require('ioredis')
-const { BASE_API_URL } = require('./utils/constants')
 const { fetchFromBrewfather } = require('./utils/brewfather-helpers')
 const redis = new Redis(process.env.REDIS_URL)
 
 export default async function handler(req, res) {
-	const authString = `${process.env.BREWFATHER_USER_ID}:${process.env.BREWFATHER_API_KEY}`
-	const encodedAuth = Buffer.from(authString).toString('base64')
 	const { page, offset, limit } = req.body
 	let more = false
 	try {
-		redis.del(`batches${page}`)
 		const cachedData = await redis.get(`batches${page}`)
 		const cachedDataNext = await redis.get(`batches${page + 1}`)
 
@@ -26,6 +21,7 @@ export default async function handler(req, res) {
 						offset + limit
 					}&limit=${limit}&include=_share`
 				)
+				console.log(nextData)
 				if (nextData.length) {
 					more = true
 					redis.set(
@@ -67,6 +63,8 @@ export default async function handler(req, res) {
 
 		console.log('Returning fresh data')
 
+		// Return the batches and a boolean of whether there
+		// are more pages.
 		return res.status(200).json({ data: batches, more })
 	} catch (error) {
 		return res.status(500).json({ msg: 'There was an error' })
