@@ -1,15 +1,15 @@
 import NavBar from './NavBar'
 import Loading from './Loading'
+import Sidebar from './SideBar'
 import { useRouter } from 'next/router'
 import { useContext, useState, useEffect } from 'react'
 import { GlobalContext } from '../pages/_app'
-import Image from 'next/image'
-import Link from 'next/link'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, ...props }) => {
 	const { navbar } = useContext(GlobalContext)
 	const router = useRouter()
 	const [loading, setLoading] = useState(false)
+	const { batchData } = props
 
 	useEffect(() => {
 		const handleStart = (url) => {
@@ -34,26 +34,7 @@ const Layout = ({ children }) => {
 				}`}
 			>
 				<div className='md:col-span-3'>{children}</div>
-				<div className='flex flex-col gap-y-4 md:col-span-1'>
-					<section>
-						<h3 className='mb-4 font-medium text-xl'>
-							Try Brewfather
-						</h3>
-						<a
-							href='https://brewfather.app/?via=smallbatchbru'
-							target='_blank'
-							rel='noopener noreferer'
-							className='relative w-full'
-						>
-							<Image
-								src='/brewfather_icon.png'
-								alt='brewfather icon'
-								width='150'
-								height='150'
-							/>
-						</a>
-					</section>
-				</div>
+				<Sidebar batchData={batchData} />
 			</div>
 			{/* {footer && <Footer footer={footer} />} */}
 		</>

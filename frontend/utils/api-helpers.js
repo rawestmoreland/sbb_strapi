@@ -1,3 +1,5 @@
+import { CorporateContactJsonLd } from 'next-seo'
+
 // Get the url of the Strapi API based om the env variable or the default local one.
 export function getStrapiURL(path) {
 	return `${
@@ -22,11 +24,30 @@ export async function fetchBrewfather(path, options = {}) {
 	const response = await fetch(requestUrl, mergedOptions)
 
 	if (!response.ok) {
-		console.error(reponse.statusText)
+		console.error(response.statusText)
 		throw new Error(`An error occurred please try again`)
 	}
 
 	const data = await response.json()
+
+	return data
+}
+
+/**
+ *
+ * @returns The last reading data from the most recent fermenting batch
+ */
+export async function fetchLastReading() {
+	const fetchUrl =
+		process.env.NODE_ENV === 'production'
+			? 'https://strapi-sbb.netlify.app/api/lasttiltreading'
+			: 'http://localhost:8888/api/lasttiltreading'
+
+	const res = await fetch(fetchUrl, {
+		method: 'POST',
+	})
+
+	const { data } = await res.json()
 
 	return data
 }
