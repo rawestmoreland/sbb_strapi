@@ -13,7 +13,7 @@ const redis = new Redis(process.env.REDIS_URL)
 export default async function handler(req, res) {
 	const batch = await fetchFromBrewfather(`/batches?status=Fermenting`)
 
-	if (batch) {
+	if (batch && batch.length > 0) {
 		const id = batch[0]._id
 		const allReadings = await fetchFromBrewfather(`/batches/${id}/readings`)
 		// filter out anything not TILT (PLAATO is mixed in there sometime)

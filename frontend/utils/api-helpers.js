@@ -41,7 +41,7 @@ export async function fetchLastReading() {
 	const fetchUrl =
 		process.env.NODE_ENV === 'production'
 			? 'https://strapi-sbb.netlify.app/api/lasttiltreading'
-			: 'http://localhost:8888/api/lasttiltreading'
+			: 'http://localhost:3000/api/lasttiltreading'
 
 	const res = await fetch(fetchUrl, {
 		method: 'POST',
@@ -49,7 +49,7 @@ export async function fetchLastReading() {
 
 	const { data } = await res.json()
 
-	return data
+	return data ?? null
 }
 
 // Helper to make GET requests to Strapi
