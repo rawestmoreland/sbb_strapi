@@ -17,7 +17,7 @@ const Layout = ({ children, ...props }) => {
 		const handleComplete = () => setLoading(false)
 
 		router.events.on('routeChangeStart', handleStart)
-		router.events.on('hasChangeComplete', handleComplete)
+		router.events.on('routeChangeComplete', handleComplete)
 		router.events.on('routeChangeError', handleComplete)
 		return function cleanup() {
 			handleComplete
