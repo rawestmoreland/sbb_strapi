@@ -24,4 +24,17 @@ module.exports = ({ env }) => ({
       delete: {},
     },
   },
+  email: {
+    provider: "gmail-oauth2",
+    providerOptions: {
+      username: "smallbatchbru@gmail.com",
+      clientId: env("OAUTH_CLIENTID"),
+      clientSecret: env("OAUTH_CLIENT_SECRET"),
+      refreshToken: env("OAUTH_REFRESH_TOKEN"),
+    },
+    settings: {
+      defaultFrom: "richard@smallbatchbru.com",
+      defaultReplyTo: "richard@smallbatchbru.com",
+    },
+  },
 });

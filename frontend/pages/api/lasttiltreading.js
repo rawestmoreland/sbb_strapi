@@ -28,5 +28,5 @@ export default async function handler(req, res) {
 				},
 			})
 		} else return res.status(200).json({ msg: 'no tilt', data: [] })
-	} else return res.status(404).json({ msg: 'No batches found' })
+	} else return res.status(200).json({ msg: 'No batches found' })
 }
