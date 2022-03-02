@@ -1,10 +1,12 @@
-import { CorporateContactJsonLd } from 'next-seo'
-
 // Get the url of the Strapi API based om the env variable or the default local one.
 export function getStrapiURL(path) {
 	return `${
 		process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'
 	}${path}`
+}
+
+export function getSBBURL() {
+	return `${process.env.NEXT_PUBLIC_SBB_URL || 'http://localhost:3000'}`
 }
 
 export async function fetchBrewfather(path, options = {}) {
@@ -41,6 +43,8 @@ export async function fetchLastReading() {
 	const fetchUrl =
 		process.env.NODE_ENV === 'production'
 			? 'https://strapi-sbb.netlify.app/api/lasttiltreading'
+			: process.env.DEPLOY_PREVIEW === 'deploy-preview'
+			? `${process.env.DEPLOY_PRIME_URL}/api/lasttiltreading`
 			: 'http://localhost:3000/api/lasttiltreading'
 
 	const res = await fetch(fetchUrl, {

@@ -12,15 +12,16 @@ const Layout = ({ children, ...props }) => {
 	const { batchData } = props
 
 	useEffect(() => {
-		const handleStart = (url) => {
-			url !== router.pathname ? setLoading(true) : setLoading(false)
-		}
+		const handleStart = () => setLoading(true)
 
-		const handleComplete = (url) => setLoading(false)
+		const handleComplete = () => setLoading(false)
 
 		router.events.on('routeChangeStart', handleStart)
-		router.events.on('routeChangeComplete', handleComplete)
+		router.events.on('hasChangeComplete', handleComplete)
 		router.events.on('routeChangeError', handleComplete)
+		return function cleanup() {
+			handleComplete
+		}
 	}, [router])
 	return (
 		<>
