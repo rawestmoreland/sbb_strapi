@@ -6,7 +6,7 @@ export function getStrapiURL(path) {
 }
 
 export function getSBBURL() {
-	return `${process.env.NEXT_PUBLIC_SBB_URL || 'http://localhost:3000'}`
+	return `${process.env.NEXT_PUBLIC_SBB_URL || 'http://localhost:8888'}`
 }
 
 export async function fetchBrewfather(path, options = {}) {
@@ -45,7 +45,7 @@ export async function fetchLastReading() {
 			? 'https://strapi-sbb.netlify.app/api/lasttiltreading'
 			: process.env.CONTEXT === 'branch-deploy'
 			? `${process.env.DEPLOY_PRIME_URL}/api/lasttiltreading`
-			: 'http://localhost:3000/api/lasttiltreading'
+			: 'http://localhost:8888/api/lasttiltreading'
 
 	const res = await fetch(fetchUrl, {
 		method: 'POST',
