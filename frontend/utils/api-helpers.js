@@ -43,7 +43,7 @@ export async function fetchLastReading() {
 	const fetchUrl =
 		process.env.NODE_ENV === 'production'
 			? 'https://strapi-sbb.netlify.app/api/lasttiltreading'
-			: process.env.DEPLOY_PREVIEW === 'deploy-preview'
+			: process.env.CONTEXT === 'branch-deploy'
 			? `${process.env.DEPLOY_PRIME_URL}/api/lasttiltreading`
 			: 'http://localhost:3000/api/lasttiltreading'
 
