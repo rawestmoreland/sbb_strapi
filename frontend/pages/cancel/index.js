@@ -1,7 +1,7 @@
 import Layout from '../../components/Layout'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { getSBBURL } from './utils/api-helpers'
+import { getSBBURL } from '../../utils/api-helpers'
 
 const ConfirmPage = () => {
 	const router = useRouter()
