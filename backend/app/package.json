@@ -10,6 +10,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "googleapis": "^95.0.0",
     "knex": "0.21.18",
     "nodemailer": "^6.7.2",
     "pg": "^8.7.1",
@@ -20,11 +21,12 @@
     "strapi-connector-bookshelf": "3.6.8",
     "strapi-plugin-content-manager": "3.6.8",
     "strapi-plugin-content-type-builder": "3.6.8",
-    "strapi-plugin-email": "3.6.8",
+    "strapi-plugin-email": "^3.6.8",
     "strapi-plugin-graphql": "^3.6.8",
     "strapi-plugin-i18n": "3.6.8",
     "strapi-plugin-upload": "3.6.8",
     "strapi-plugin-users-permissions": "3.6.8",
+    "strapi-provider-email-gmail-oauth2": "^0.1.7",
     "strapi-provider-upload-cloudinary": "^3.6.8",
     "strapi-utils": "3.6.8"
   },

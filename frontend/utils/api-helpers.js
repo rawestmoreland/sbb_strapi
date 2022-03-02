@@ -1,10 +1,12 @@
-import { CorporateContactJsonLd } from 'next-seo'
-
 // Get the url of the Strapi API based om the env variable or the default local one.
 export function getStrapiURL(path) {
 	return `${
 		process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'
 	}${path}`
+}
+
+export function getSBBURL() {
+	return `${process.env.NEXT_PUBLIC_SBB_URL || 'http://localhost:3000'}`
 }
 
 export async function fetchBrewfather(path, options = {}) {

@@ -1,5 +1,4 @@
 "use strict";
-
 const { baseURL } = require("../../../config/functions/utils/helpers");
 
 /**
@@ -8,13 +7,13 @@ const { baseURL } = require("../../../config/functions/utils/helpers");
  */
 
 module.exports = {
-  sendPost: async (email, token, post) => {
+  sendVerify: async (email, token) => {
     await strapi.plugins["email"].services.email.send({
       to: email,
       from: "smallbatchbru@gmail.com",
       replyTo: "richard@smallbatchbru.com",
-      subject: `[New Post] ${post.title}`,
-      text: `New post from SmallBatchBru! ${baseURL}/${post.slug}`,
+      subject: "Confirm your email for smallbatchbru.com",
+      text: `${baseURL}/confirm?token=${token}`,
       html: `
       <div style="width:100%; height:100%;">
         <table style="margin:0 auto; text-align:center;">
@@ -22,28 +21,11 @@ module.exports = {
             <td><h1>🍻 SmallBatchBru Newsletter 🍻</h1></td>
           </tr>
           <tr>
-            <td><h2>We've posted a new article.</h2></td>
+            <td><h2>Please confirm your email</h2></td>
           </tr>
           <tr>
             <td>
-              <h3>
-                ${post.title}
-              </h3>
-              <span>by: ${post.author.name}</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a style="text-decoration:none;" href="${baseURL}/post/${post.slug}">
-                <p>
-                  ${post.description}
-                </p>
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a style="font-size:11px;" href="${baseURL}/cancel?token=${token}">Unsubscribe</a>
+              <a href="${baseURL}/confirm?token=${token}">Click here to confirm your email</a>
             </td>
           </tr>
         </table>
