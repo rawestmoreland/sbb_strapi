@@ -32,6 +32,7 @@ export default async function handler(req, res) {
 					method: 'POST',
 				}
 			)
+			console.log(response)
 			const captchaValidation = await response.json()
 			/**
        * The structure of response from the veirfy API is

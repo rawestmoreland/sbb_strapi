@@ -22,20 +22,25 @@ const SubscribeForm = () => {
 		}
 
 		try {
-			const response = await fetch('/api/subscribe', {
-				method: 'POST',
-				body: JSON.stringify({ email, captcha: captchaCode }),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_SBB_URL}/api/subscribe`,
+				{
+					method: 'POST',
+					body: JSON.stringify({ email, captcha: captchaCode }),
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			)
 			if (response.ok) {
 				// If the response is ok, show an alert.
 				alert('Email registered successfully')
+				setEmail('')
 			} else {
 				// Else throw an error with the message returned
 				// from the API
 				const error = await response.json()
+				setEmail('')
 				throw new Error(error.message)
 			}
 		} catch (error) {
