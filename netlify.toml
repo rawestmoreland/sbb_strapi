@@ -2,3 +2,6 @@
 	base = "frontend/"
 	publish = ".next"
 	command = "next build"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
