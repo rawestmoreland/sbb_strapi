@@ -28,7 +28,7 @@ const SubscribeForm = () => {
 					method: 'POST',
 					body: JSON.stringify({ email, captcha: captchaCode }),
 					headers: {
-						'Content-Type': 'application/json',
+						'Content-type': 'application/json; charset=UTF-8',
 					},
 				}
 			)
