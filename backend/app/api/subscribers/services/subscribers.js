@@ -4,7 +4,7 @@ module.exports = {
   sendVerify: async (email, token) => {
     const baseURL = `${
       process.env.NODE_ENV === "production"
-        ? process.env.NEXT_PUBLIC_SBB_URL
+        ? process.env.NEXT_SBB_PUBLIC_URL
         : "http://localhost:3000"
     }`;
     try {

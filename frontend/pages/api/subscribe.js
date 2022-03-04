@@ -46,8 +46,6 @@ export default async function handler(req, res) {
 					body: JSON.stringify({ email }),
 				})
 
-				console.log(response)
-
 				return res.status(200).send(JSON.stringify(response))
 			}
 			return res.status(422).json({
