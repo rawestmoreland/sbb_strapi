@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application",
+  "scripts": {
+    "dev": "strapi develop"
+  },
   "dependencies": {
     "googleapis": "^95.0.0",
     "knex": "0.21.18",
