@@ -1,5 +1,6 @@
 module.exports = {
 	onPreBuild: async ({ inputs }) => {
+		console.log('Pre-building the context env vars...')
 		const context = process.env.CONTEXT.toUpperCase().replace(/-/g, '_')
 		Object.keys(process.env).forEach((key) => {
 			const envVar = `${context}_${key}`
