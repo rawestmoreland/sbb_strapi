@@ -6,7 +6,7 @@ export function getStrapiURL(path) {
 }
 
 export function getSBBURL() {
-	return `${process.env.NEXT_PUBLIC_SBB_URL || 'http://localhost:8888'}`
+	return `${process.env.NEXT_PUBLIC_SBB_URL || 'http://localhost:3000'}`
 }
 
 export async function fetchBrewfather(path, options = {}) {
@@ -39,9 +39,9 @@ export async function fetchBrewfather(path, options = {}) {
  * @returns The last reading data from the most recent fermenting batch
  */
 export async function fetchLastReading() {
-	const fetchUrl =
-		`${process.env.NEXT_PUBLIC_SBB_URL}/api/lasttiltreading` ||
-		'http://localhost:8888/api/lasttiltreading'
+	const fetchUrl = `${
+		process.env.NEXT_PUBLIC_SBB_URL || 'http://localhost:3000'
+	}/api/lasttiltreading`
 
 	const res = await fetch(fetchUrl, {
 		method: 'POST',
@@ -65,9 +65,9 @@ export async function strapiPost(path, options = {}) {
 	const requestUrl = getStrapiURL(path)
 	const response = await fetch(requestUrl, mergedOptions)
 
-	if (!response.ok) {
-		console.error(response.statusText)
-		throw new Error('An error occurred please try again.')
+	if (response.status !== 200) {
+		const error = await response.json()
+		throw new Error(error.data.errors.email[0] || 'There was an error')
 	}
 	const data = await response.json()
 	return data
@@ -88,7 +88,6 @@ export async function fetchAPI(path, options = {}) {
 	const response = await fetch(requestUrl, mergedOptions)
 
 	if (!response.ok) {
-		console.error(response.statusText)
 		throw new Error(`An error occured please try again`)
 	}
 	const data = await response.json()

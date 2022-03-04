@@ -16,7 +16,6 @@ export default async function handler(req, res) {
 		}
 
 		try {
-			console.log('google recaptcha verify')
 			// Ping the google recaptcha verify API to verify the captcha code you received
 			const response = await fetch(
 				`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${captcha}`,
@@ -28,7 +27,6 @@ export default async function handler(req, res) {
 					method: 'POST',
 				}
 			)
-			console.log(response)
 			const captchaValidation = await response.json()
 			/**
        * The structure of response from the veirfy API is
@@ -42,23 +40,20 @@ export default async function handler(req, res) {
 			if (captchaValidation.success) {
 				// Replace this with the API that will save the data received
 				// to your backend
-				const strapiRes = await strapiPost('/subscribers', {
-					method: 'POST',
-					body: JSON.stringify(email),
-				})
-				if (strapiRes.ok) {
-					return res.status(200).send('OK')
-				} else {
-					const error = await strapiRes.json()
-					throw new Error(error.message)
-				}
-			}
 
+				const response = await strapiPost('/subscribers', {
+					method: 'POST',
+					body: JSON.stringify({ email }),
+				})
+
+				console.log(response)
+
+				return res.status(200).send(JSON.stringify(response))
+			}
 			return res.status(422).json({
 				message: 'Unproccesable request, Invalid captcha code',
 			})
 		} catch (error) {
-			console.log(error)
 			return res.status(422).json({ message: error.message })
 		}
 	}

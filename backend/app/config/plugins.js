@@ -33,8 +33,8 @@ module.exports = ({ env }) => ({
       refreshToken: env("OAUTH_REFRESH_TOKEN"),
     },
     settings: {
-      defaultFrom: "richard@smallbatchbru.com",
-      defaultReplyTo: "richard@smallbatchbru.com",
+      defaultFrom: "smallbatchbru@gmail.com",
+      defaultReplyTo: "smallbatchbru@gmail.com",
     },
   },
 });

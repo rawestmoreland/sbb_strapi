@@ -10,7 +10,6 @@
 		"lerna": "^4.0.0"
 	},
 	"dependencies": {
-		"netlify-cli": "^9.12.2",
 		"slugify": "^1.6.1"
 	}
 }

@@ -54,13 +54,9 @@ export const getServerSideProps = async ({ query }) => {
 	const offset = page * 10 - 10
 	const limit = 10
 
-	console.log('context', process.env.CONTEXT)
+	const fetchUrl = process.env.NEXT_PUBLIC_SBB_URL || 'http://localhost:3000'
 
-	const fetchUrl =
-		`${process.env.NEXT_PUBLIC_SBB_URL}/api/batches` ||
-		'http://localhost:8888/api/batches'
-
-	const res = await fetch(fetchUrl, {
+	const res = await fetch(`${fetchUrl}/api/batches`, {
 		method: 'POST',
 		body: JSON.stringify({
 			page,

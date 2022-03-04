@@ -21,20 +21,22 @@ const SubscribeForm = () => {
 			return
 		}
 
+		const fetchUrl =
+			process.env.NEXT_PUBLIC_SBB_URL || 'http://localhost:3000'
+
 		try {
-			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_SBB_URL}/api/subscribe`,
-				{
-					method: 'POST',
-					body: JSON.stringify({ email, captcha: captchaCode }),
-					headers: {
-						'Content-type': 'application/json; charset=UTF-8',
-					},
-				}
-			)
+			const response = await fetch(`${fetchUrl}/api/subscribe`, {
+				method: 'POST',
+				body: JSON.stringify({ email, captcha: captchaCode }),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
+			})
 			if (response.ok) {
 				// If the response is ok, show an alert.
-				alert('Email registered successfully')
+				alert(
+					'Email registered successfully. Please verify your email by checking your inbox.'
+				)
 			} else {
 				// Else throw an error with the message returned
 				// from the API
@@ -48,8 +50,6 @@ const SubscribeForm = () => {
 					'Something went wrong. Unable to register right now.'
 			)
 		} finally {
-			// Reset the reCAPTCHA when the request has failed or succeeeded
-			// so that it can be executed again if user submits another email.
 			recaptchaRef.current.reset()
 			setEmail('')
 		}
