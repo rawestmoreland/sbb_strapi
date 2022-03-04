@@ -8,13 +8,19 @@ module.exports = {
       data.token = Buffer.from(email).toString("base64");
       const userCheck = await strapi.query("subscribers").findOne({ email });
       if (userCheck !== null) {
-        console.log("Sending email");
-        await strapi.services.subscribers.sendVerify(email, data.token);
+        await strapi.services.subscribers.sendVerify(
+          result.email,
+          result.token
+        );
       }
     },
     async afterCreate(result) {
-      console.log(result);
-      await strapi.services.subscribers.sendVerify(result.email, result.token);
+      if (result) {
+        await strapi.services.subscribers.sendVerify(
+          result.email,
+          result.token
+        );
+      }
     },
   },
 };

@@ -1,5 +1,4 @@
 import Layout from '../../components/Layout'
-import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { getSBBURL } from '../../utils/api-helpers'
@@ -10,7 +9,8 @@ const ConfirmPage = () => {
 	const [activated, setActivated] = useState(false)
 	const [validating, setValidating] = useState(true)
 	const verifyEmail = async (token) => {
-		const res = await fetch(`${getSBBURL}/api/verifyemail`, {
+		const requestUrl = getSBBURL()
+		const res = await fetch(`${requestUrl}/api/verifyemail`, {
 			method: 'POST',
 			body: JSON.stringify({
 				token,
@@ -25,7 +25,7 @@ const ConfirmPage = () => {
 
 		if (data && data.activated) {
 			setActivated(true)
-			router.replace('/', `${getSBBURL}`, { shallow: true })
+			router.replace('/', `${requestUrl}`, { shallow: true })
 		}
 	}
 
