@@ -35,7 +35,6 @@ const SubscribeForm = () => {
 			if (response.ok) {
 				// If the response is ok, show an alert.
 				alert('Email registered successfully')
-				setEmail('')
 			} else {
 				// Else throw an error with the message returned
 				// from the API
@@ -73,6 +72,7 @@ const SubscribeForm = () => {
 				id='email'
 				name='email'
 				type='text'
+				value={email}
 				autoComplete='email'
 				placeholder='Email'
 				onChange={handleChange}

@@ -1,9 +1,4 @@
-const sleep = () =>
-	new Promise((resolve) => {
-		setTimeout(() => {
-			resolve()
-		}, 350)
-	})
+const { strapiPost } = require('../../utils/api-helpers')
 
 export default async function handler(req, res) {
 	const { body, method } = req
@@ -16,7 +11,7 @@ export default async function handler(req, res) {
 		if (!email || !captcha) {
 			return res.status(422).json({
 				message:
-					'Unproccesable request, please provide the required fields',
+					'Unprocessable request, please provide the required fields',
 			})
 		}
 
@@ -46,9 +41,16 @@ export default async function handler(req, res) {
 			if (captchaValidation.success) {
 				// Replace this with the API that will save the data received
 				// to your backend
-				await sleep()
-				// Return 200 if everything is successful
-				return res.status(200).send('OK')
+				const strapiRes = await strapiPost('/subscribers', {
+					method: 'POST',
+					body: JSON.stringify(email),
+				})
+				if (strapiRes.ok) {
+					return res.status(200).send('OK')
+				} else {
+					const error = await strapiRes.json()
+					throw new Error(error.message)
+				}
 			}
 
 			return res.status(422).json({

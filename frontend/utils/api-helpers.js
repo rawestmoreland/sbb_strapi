@@ -52,6 +52,27 @@ export async function fetchLastReading() {
 	return data ?? null
 }
 
+export async function strapiPost(path, options = {}) {
+	const defaultOptions = {
+		headers: {
+			'Content-type': 'application/json',
+		},
+	}
+	const mergedOptions = {
+		...defaultOptions,
+		...options,
+	}
+	const requestUrl = getStrapiURL(path)
+	const response = await fetch(requestUrl, mergedOptions)
+
+	if (!response.ok) {
+		console.error(response.statusText)
+		throw new Error('An error occurred please try again.')
+	}
+	const data = await response.json()
+	return data
+}
+
 // Helper to make GET requests to Strapi
 export async function fetchAPI(path, options = {}) {
 	const defaultOptions = {

@@ -7,7 +7,7 @@ module.exports = {
 			const envVar = `${context}_${key}`
 			const val = process.env[envVar]
 			if (process.env[envVar]) {
-				console.log(`Exporting ${key}=${val}.`)
+				console.log(`Exporting ${key}=${val}`)
 				process.env[key] = val
 			}
 		})
