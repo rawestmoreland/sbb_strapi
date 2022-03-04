@@ -24,9 +24,8 @@ export async function fetchBrewfather(path, options = {}) {
 	}
 	const requestUrl = `${process.env.BREWFATHER_URL}${path}`
 	const response = await fetch(requestUrl, mergedOptions)
-
 	if (!response.ok) {
-		console.error(response.statusText)
+		console.error(response)
 		throw new Error(`An error occurred please try again`)
 	}
 
@@ -41,11 +40,8 @@ export async function fetchBrewfather(path, options = {}) {
  */
 export async function fetchLastReading() {
 	const fetchUrl =
-		process.env.NODE_ENV === 'production'
-			? 'https://strapi-sbb.netlify.app/api/lasttiltreading'
-			: process.env.CONTEXT === 'branch-deploy'
-			? `${process.env.DEPLOY_PRIME_URL}/api/lasttiltreading`
-			: 'http://localhost:8888/api/lasttiltreading'
+		`${process.env.NEXT_PUBLIC_SBB_URL}/api/lasttiltreading` ||
+		'http://localhost:8888/api/lasttiltreading'
 
 	const res = await fetch(fetchUrl, {
 		method: 'POST',
