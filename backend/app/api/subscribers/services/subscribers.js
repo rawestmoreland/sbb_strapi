@@ -8,6 +8,7 @@ const { baseURL } = require("../../../config/functions/utils/helpers");
 
 module.exports = {
   sendVerify: async (email, token) => {
+    console.log("sending email");
     await strapi.plugins["email"].services.email.send({
       to: email,
       from: "smallbatchbru@gmail.com",
