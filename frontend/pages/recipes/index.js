@@ -57,11 +57,8 @@ export const getServerSideProps = async ({ query }) => {
 	console.log('context', process.env.CONTEXT)
 
 	const fetchUrl =
-		process.env.NODE_ENV === 'production'
-			? 'https://strapi-sbb.netlify.app/api/batches'
-			: process.env.CONTEXT === 'branch-deploy'
-			? `${process.env.DEPLOY_PRIME_URL}/api/batches`
-			: 'http://localhost:8888/api/batches'
+		`${process.env.NEXT_PUBLIC_SBB_URL}/api/batches` ||
+		'http://localhost:8888/api/batches'
 
 	const res = await fetch(fetchUrl, {
 		method: 'POST',

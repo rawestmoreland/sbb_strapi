@@ -2,3 +2,8 @@
 	base = "frontend/"
 	publish = ".next"
 	command = "next build"
+
+[[plusings]]
+package = "@netlify/plugin-nextjs"
+[[plugins]]
+package = "/plugins/netlify-plugin-env-var-by-context"
