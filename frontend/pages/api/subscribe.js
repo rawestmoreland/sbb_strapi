@@ -1,4 +1,4 @@
-const { strapiPost } = require('../../utils/api-helpers')
+const { strapiPostSubscribe } = require('../../utils/api-helpers')
 
 export default async function handler(req, res) {
 	const { body, method } = req
@@ -41,10 +41,14 @@ export default async function handler(req, res) {
 				// Replace this with the API that will save the data received
 				// to your backend
 
-				const response = await strapiPost('/subscribers', {
-					method: 'POST',
-					body: JSON.stringify({ email }),
-				})
+				const response = await strapiPostSubscribe(
+					'/subscribers',
+					{
+						method: 'POST',
+						body: JSON.stringify({ email }),
+					},
+					email
+				)
 
 				return res.status(200).send(JSON.stringify(response))
 			}

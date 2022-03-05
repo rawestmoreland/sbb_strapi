@@ -33,16 +33,15 @@ const SubscribeForm = () => {
 				},
 			})
 			if (response.ok) {
+				const { message } = await response.json()
 				// If the response is ok, show an alert.
-				alert(
-					'Email registered successfully. Please verify your email by checking your inbox.'
-				)
+				alert(message)
 			} else {
+				const error = await response.json()
 				// Else throw an error with the message returned
 				// from the API
-				const error = await response.json()
+				alert(error.message)
 				setEmail('')
-				throw new Error(error.message)
 			}
 		} catch (error) {
 			alert(

@@ -52,10 +52,11 @@ export async function fetchLastReading() {
 	return data ?? null
 }
 
-export async function strapiPost(path, options = {}) {
+export async function strapiPostSubscribe(path, options = {}, email = '') {
 	const defaultOptions = {
 		headers: {
-			'Content-type': 'application/json',
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${process.env.STRAPI_ADMIN_TOKEN}`,
 		},
 	}
 	const mergedOptions = {
@@ -63,14 +64,30 @@ export async function strapiPost(path, options = {}) {
 		...options,
 	}
 	const requestUrl = getStrapiURL(path)
+	const userCheck = await fetchAPI(`/subscribers?email=${email}`)
+
 	const response = await fetch(requestUrl, mergedOptions)
 
 	if (response.status !== 200) {
 		const error = await response.json()
-		throw new Error(error.data.errors.email[0] || 'There was an error')
+		if (userCheck.length > 0) {
+			return {
+				data: error.data,
+				message:
+					"You already have that email registered. We'll send you a verification email just to be sure.",
+			}
+		}
+		return {
+			data: error.data,
+			message: error.data.errors.email[0] || 'There was an error',
+		}
 	}
 	const data = await response.json()
-	return data
+	return {
+		data,
+		message:
+			"Email successfully registered. Please check your email to verify that it's you",
+	}
 }
 
 // Helper to make GET requests to Strapi
@@ -78,6 +95,7 @@ export async function fetchAPI(path, options = {}) {
 	const defaultOptions = {
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${process.env.STRAPI_ADMIN_TOKEN}`,
 		},
 	}
 	const mergedOptions = {
