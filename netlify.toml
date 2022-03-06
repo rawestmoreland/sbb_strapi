@@ -3,7 +3,7 @@
 	publish = ".next"
 	command = "next build"
 
-[[plusings]]
+[[plugins]]
 package = "@netlify/plugin-nextjs"
 [[plugins]]
 package = "/plugins/netlify-plugin-env-var-by-context"
