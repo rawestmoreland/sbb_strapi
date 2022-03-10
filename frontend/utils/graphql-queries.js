@@ -23,7 +23,7 @@ export const GET_POST_BY_SLUG = gql`
 
 export const GET_POSTS = gql`
 	query GetPosts {
-		posts(limit: 5, sort: "published:desc") {
+		posts(sort: "published:desc") {
 			title
 			content
 			description
