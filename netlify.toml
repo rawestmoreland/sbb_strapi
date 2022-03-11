@@ -3,7 +3,10 @@
 	publish = ".next"
 	command = "next build"
 
+[context.branch-deploy]
+  command = "npm run noIndex"
+
 [[plugins]]
-package = "@netlify/plugin-nextjs"
+	package = "@netlify/plugin-nextjs"
 [[plugins]]
-package = "/plugins/netlify-plugin-env-var-by-context"
+	package = "/plugins/netlify-plugin-env-var-by-context"
