@@ -57,7 +57,7 @@ export const GET_CATEGORIES = gql`
 
 export const GET_ALL_THINGS = gql`
 	query GetAllThings {
-		posts(limit: 5, sort: "published:desc") {
+		posts(sort: "published:desc") {
 			id
 			title
 			content
