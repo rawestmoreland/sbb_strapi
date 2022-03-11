@@ -5,7 +5,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "NODE_OPTIONS='--inspect' next dev",
-		"noIndex": "next build && echo 'User-agent: *\nDisallow: /' > dist/robots.txt",
+		"noIndex": "npm run build && echo 'User-agent: *\nDisallow: /' > public/robots.txt",
 		"build": "next build",
 		"start": "next start",
 		"storybook": "start-storybook -p 6006",
