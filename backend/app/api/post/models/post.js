@@ -4,7 +4,7 @@ module.exports = {
   lifecycles: {
     async beforeUpdate(params, data) {
       if (data.published_at != null) {
-        const { id } = data;
+        const { id } = params;
         const previousData = await strapi.query("post").findOne({ id });
         const previousPublishedAt = previousData.published_at;
         const currentPublished_at = data.published_at;
