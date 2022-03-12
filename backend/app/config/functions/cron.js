@@ -18,6 +18,7 @@ module.exports = {
     const draftArticlesToPublish = await strapi.api.post.services.post.find({
       _publicationState: "preview",
       published_at_null: true,
+      auto_publish: true,
       published_lt: new Date(),
     });
 
