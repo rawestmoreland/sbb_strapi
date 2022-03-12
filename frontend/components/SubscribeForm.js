@@ -65,15 +65,18 @@ const SubscribeForm = () => {
 				sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
 				onChange={onReCAPTCHAChange}
 			/>
-			<label htmlFor='email'>Email</label>
+			<p className='text-sm'>
+				Sign up to be notified when we publish new content!
+			</p>
 			<input
-				className='border px-4 py-2 w-full text-xs'
+				className='border p-2 w-full text-xs'
+				aria-label='email'
 				id='email'
 				name='email'
 				type='text'
 				value={email}
 				autoComplete='email'
-				placeholder='Email'
+				placeholder='Email address'
 				onChange={handleChange}
 				required
 			/>
