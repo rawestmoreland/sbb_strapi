@@ -24,8 +24,7 @@ module.exports = {
           <table style="margin:0 auto; text-align:center;">
             <tr>
               <td>
-                <h1
-                  style="padding-bottom:1rem; border-bottom:2px solid #262626;>
+                <h1 style="padding-bottom:1rem; border-bottom:2px solid #262626;">
                     🍻 SmallBatchBru Newsletter 🍻
                   </h1>
               </td>
