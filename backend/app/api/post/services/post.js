@@ -20,7 +20,7 @@ module.exports = {
         text: `New post from SmallBatchBru! ${baseURL}/${post.slug}`,
         html: `
         <div
-          style="max-width:75%; height:100%; margin:0 auto; background-color:whitesmoke; padding:2rem; color:#262626">
+          style="max-width:75%; height:100%; margin:0 auto; background-color:whitesmoke; padding:2rem; color:#262626;">
           <table style="margin:0 auto; text-align:center;">
             <tr>
               <td>
