@@ -50,6 +50,10 @@
     "categories": {
       "via": "posts",
       "collection": "categories"
+    },
+    "auto_publish": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
