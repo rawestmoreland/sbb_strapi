@@ -13,7 +13,7 @@ module.exports = {
           .find({ activated: true });
         if (
           currentPublished_at != previousPublishedAt &&
-          process.env.NEXT_STAPI_SBB_URL.contains("sbb-strapi-prod")
+          process.env.NEXT_STRAPI_SBB_URL.contains("sbb-strapi-prod")
         ) {
           subList.forEach(async (sub) => {
             await strapi.services.post.sendPost(
