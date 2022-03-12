@@ -14,7 +14,7 @@ module.exports = {
         const subList = await strapi
           .query("subscribers")
           .find({ activated: true });
-        console.log("CONTEXT", process.env.NEXT_PUBLIC_STRAPI_URL);
+        console.log(strapiURL.contains("strapi-sbb-prod"));
         if (
           currentPublished_at != previousPublishedAt &&
           strapiURL?.contains("strapi-sbb-prod")
