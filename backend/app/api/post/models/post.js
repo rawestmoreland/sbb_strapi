@@ -14,10 +14,10 @@ module.exports = {
         const subList = await strapi
           .query("subscribers")
           .find({ activated: true });
-        console.log(strapiURL.contains("strapi-sbb-prod"));
+        console.log(strapiURL.includes("strapi-sbb-prod"));
         if (
           currentPublished_at != previousPublishedAt &&
-          strapiURL?.contains("strapi-sbb-prod")
+          strapiURL?.includes("strapi-sbb-prod")
         ) {
           subList.forEach(async (sub) => {
             await strapi.services.post.sendPost(
