@@ -64,7 +64,7 @@ export async function strapiPostSubscribe(path, options = {}, email = '') {
 		...options,
 	}
 	const requestUrl = getStrapiURL(path)
-	const userCheck = await fetchAPI(`/subscribers?email=${email}`)
+	const userCheck = await fetchAPIAuth(`/subscribers?email=${email}`)
 
 	const response = await fetch(requestUrl, mergedOptions)
 
@@ -92,6 +92,27 @@ export async function strapiPostSubscribe(path, options = {}, email = '') {
 
 // Helper to make GET requests to Strapi
 export async function fetchAPI(path, options = {}) {
+	const defaultOptions = {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	}
+	const mergedOptions = {
+		...defaultOptions,
+		...options,
+	}
+	const requestUrl = getStrapiURL(path)
+	const response = await fetch(requestUrl, mergedOptions)
+
+	if (!response.ok) {
+		throw new Error(`An error occured please try again`)
+	}
+	const data = await response.json()
+	return data
+}
+
+// Helper to make GET requests to Strapi with Bearer token
+export async function fetchAPIAuth(path, options = {}) {
 	const defaultOptions = {
 		headers: {
 			'Content-Type': 'application/json',
