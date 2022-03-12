@@ -3,8 +3,8 @@ const { parse } = require("pg-connection-string");
 module.exports = ({ env }) => {
   const { host, port, database, user, password } = parse(
     env("DATABASE_URL") ||
-      env(HEROKU_POSTGRESQL_COBALT_URL) ||
-      env(HEROKU_POSTGRESQL_RED_URL)
+      env("HEROKU_POSTGRESQL_COBALT_URL") ||
+      env("HEROKU_POSTGRESQL_COBALT_URL")
   );
 
   return {
