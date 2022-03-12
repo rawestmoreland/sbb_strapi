@@ -20,8 +20,8 @@
       "targetField": "name"
     },
     "posts": {
-      "collection": "post",
       "via": "categories",
+      "collection": "post",
       "dominant": true
     }
   }
