@@ -5,10 +5,10 @@ import SubscribeForm from './SubscribeForm'
 const SideBar = ({ batchData }) => {
 	return (
 		<div className='flex flex-col gap-y-8 md:col-span-1'>
-			<section>
+			{/* <section>
 				<h3 className='mb-2 font-medium text-xl'>Subscribe</h3>
 				<SubscribeForm />
-			</section>
+			</section> */}
 			<section>
 				<h3 className='mb-4 font-medium text-xl'>Try Brewfather</h3>
 				<a
