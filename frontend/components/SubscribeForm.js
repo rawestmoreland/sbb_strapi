@@ -45,7 +45,6 @@ const SubscribeForm = () => {
 				setEmail('')
 			}
 		} catch (error) {
-			console.error(error)
 			alert(
 				error?.message ??
 					'Something went wrong. Unable to register right now.'
