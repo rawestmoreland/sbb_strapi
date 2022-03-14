@@ -33,6 +33,8 @@ const SubscribeForm = () => {
 					'Access-Control-Allow-Origin': '*',
 				},
 			})
+			const resJson = await response.json()
+			console.log(resJson)
 			if (response.ok) {
 				const { message } = await response.json()
 				// If the response is ok, show an alert.
@@ -46,7 +48,7 @@ const SubscribeForm = () => {
 			}
 		} catch (error) {
 			alert(
-				error?.message ||
+				error?.message ??
 					'Something went wrong. Unable to register right now.'
 			)
 		} finally {
