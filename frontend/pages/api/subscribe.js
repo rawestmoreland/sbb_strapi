@@ -37,6 +37,7 @@ export default async function handler(req, res) {
        *  "error-codes": [...]        // optional
         }
        */
+			console.log('captcha ', captchaValidation)
 			if (captchaValidation.success) {
 				const response = await strapiPostSubscribe(
 					'/subscribers',
@@ -53,7 +54,6 @@ export default async function handler(req, res) {
 				message: 'Unproccesable request, Invalid captcha code',
 			})
 		} catch (error) {
-			console.log(error.message)
 			return res.status(422).json({ message: error.message })
 		}
 	}
