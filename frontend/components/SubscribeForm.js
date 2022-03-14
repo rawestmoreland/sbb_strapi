@@ -30,6 +30,7 @@ const SubscribeForm = () => {
 				body: JSON.stringify({ email, captcha: captchaCode }),
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8',
+					'Access-Control-Allow-Origin': '*',
 				},
 			})
 			if (response.ok) {

@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 			)
 			const captchaValidation = await response.json()
 			/**
-       * The structure of response from the veirfy API is
+       * The structure of response from the verify API is
        * {
        *  "success": true|false,
        *  "challenge_ts": timestamp,  // timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ)
@@ -38,9 +38,6 @@ export default async function handler(req, res) {
         }
        */
 			if (captchaValidation.success) {
-				// Replace this with the API that will save the data received
-				// to your backend
-
 				const response = await strapiPostSubscribe(
 					'/subscribers',
 					{
@@ -56,6 +53,7 @@ export default async function handler(req, res) {
 				message: 'Unproccesable request, Invalid captcha code',
 			})
 		} catch (error) {
+			console.log(error.message)
 			return res.status(422).json({ message: error.message })
 		}
 	}
