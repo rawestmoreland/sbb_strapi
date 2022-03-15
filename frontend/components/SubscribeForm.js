@@ -7,7 +7,8 @@ const SubscribeForm = () => {
 		setEmail(e.target.value)
 	}
 	const handleSubmit = (form) => {
-		const data = new FormData('subscribe', 'newsletter')
+		const data = new FormData(form)
+		data.append('subscribe', 'newsletter')
 		fetch('/', {
 			method: 'POST',
 			body: data,
