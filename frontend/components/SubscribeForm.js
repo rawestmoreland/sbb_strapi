@@ -47,6 +47,7 @@ const SubscribeForm = () => {
 			netlify-honeypot='got-ya'
 			name='subscribe'
 		>
+			<input type='hidden' name='form-name' value='subscribe' />
 			<p className='text-sm'>
 				Sign up to be notified when we publish new content!
 			</p>
