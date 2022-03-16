@@ -1,29 +1,12 @@
-import { useReducer } from 'react'
-
-const initialValues = {
-	email: '',
-}
-
-const initialErrors = {
-	name: false,
-}
+import { useForm } from 'react-hook-form'
 
 const SubscribeForm = () => {
-	const reducer = (currentState, nextState) => ({
-		...currentState,
-		...nextState,
-	})
-
-	const [values, setValues] = useReducer(reducer, initialValues)
-	const [errors, setErrors] = useReducer(reducer, initialErrors)
-
-	const handleChange = (e) => {
-		setValues({ [e.target.id]: e.target.value })
-	}
-
-	const onFocus = (e) => {
-		setErrors({ [e.target.id]: false })
-	}
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+	} = useForm()
 
 	const encode = (data) => {
 		return Object.keys(data)
@@ -36,32 +19,28 @@ const SubscribeForm = () => {
 			.join('&')
 	}
 
-	const handleSubmit = (e) => {
-		e.preventDefault()
-		for (const key in values) {
-			if (!values[key]) {
-				setErrors({ [key]: true })
-				return
-			}
-			setErrors({ [key]: false })
-		}
+	const onSubmit = (formData, e) => {
 		fetch('/', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: encode({
-				'form-name': e.target.getAttribute('name'),
-				...values,
+				'form-name': 'subscribe',
+				...formData,
 			}),
 		})
-			.then(() => alert('Check your inbox for your verification email'))
+			.then(() => {
+				alert('Check your inbox for your verification email')
+				reset()
+			})
 			.catch((e) =>
 				alert('There was a problem with your submission. ' + e)
 			)
+		e.preventDefault()
 	}
 
 	return (
 		<form
-			onSubmit={handleSubmit}
+			onSubmit={handleSubmit(onSubmit)}
 			className='flex flex-col items-start gap-y-2'
 			method='POST'
 			data-netlify='true'
@@ -82,11 +61,9 @@ const SubscribeForm = () => {
 				id='email'
 				name='email'
 				type='text'
-				value={values.email}
 				autoComplete='email'
 				placeholder='Email address'
-				onFocus={onFocus}
-				onChange={handleChange}
+				{...register('email')}
 				required
 			/>
 			<button className='bg-black text-white p-2 rounded' type='submit'>
