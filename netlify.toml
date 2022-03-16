@@ -3,6 +3,9 @@
 	publish = ".next"
 	command = "next build"
 
+[functions]
+	directory = "./utils/functions"
+
 [context.branch-deploy]
   command = "npm run noIndex"
 

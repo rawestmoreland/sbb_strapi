@@ -78,6 +78,7 @@ export async function strapiPostSubscribe(path, options = {}, email = '') {
 			}
 		}
 		return {
+			error: true,
 			data: error.data,
 			message: error.data.errors.email[0] || 'There was an error',
 		}
