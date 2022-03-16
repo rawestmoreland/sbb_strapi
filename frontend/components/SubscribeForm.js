@@ -1,10 +1,4 @@
 import { useForm } from 'react-hook-form'
-import {
-	useNetlifyForm,
-	NetlifyFormProvider,
-	NetlifyFormComponent,
-	Honeypot,
-} from 'react-netlify-forms'
 
 const SubscribeForm = () => {
 	const {
@@ -14,54 +8,71 @@ const SubscribeForm = () => {
 		reset,
 	} = useForm()
 
-	const netlify = useNetlifyForm({
-		name: 'contact-form',
-		action: '/success',
-		honeypotName: 'bot-field',
-		onSuccess: (response, context) => {
-			console.log('Successfully sent form data to Netlify Server')
-		},
-	})
+	const encode = (data) => {
+		return Object.keys(data)
+			.map(
+				(key) =>
+					encodeURIComponent(key) +
+					'=' +
+					encodeURIComponent(data[key])
+			)
+			.join('&')
+	}
 
-	const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i
-
-	const onSubmit = (data) => netlify.handleSubmit(null, data)
+	const onSubmit = (formData, e) => {
+		fetch('/', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: encode({
+				'form-name': 'subscribe',
+				...formData,
+			}),
+		})
+			.then(() => {
+				alert('Check your inbox for your verification email')
+				reset()
+			})
+			.catch((e) =>
+				alert('There was a problem with your submission. ' + e)
+			)
+		e.preventDefault()
+	}
 
 	return (
-		<NetlifyFormProvider {...netlify}>
-			<NetlifyFormComponent onSubmit={handleSubmit(onSubmit)}>
-				<Honeypot />
-				{netlify.success && <p>Thanks for contacting us!</p>}
-				{netlify.error && (
-					<p>
-						Sorry, we could not reach servers. Because it only works
-						on Netlify, our GitHub demo does not provide a response.
-					</p>
-				)}
-				<div>
-					<label htmlFor='email'>Email:</label>
-					<input
-						type='email'
-						name='email'
-						id='email'
-						{...register('email', {
-							required: true,
-							pattern: {
-								value: EMAIL_REGEX,
-								message: 'Invalid email address',
-							},
-						})}
-					/>
-					{errors.email && <div>{errors.email.message}</div>}
-				</div>
-				<div>
-					<button type='submit'>Submit</button>
-					<button type='reset' onClick={() => reset()}>
-						Reset
-					</button>
-				</div>
-			</NetlifyFormComponent>
-		</NetlifyFormProvider>
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className='flex flex-col items-start gap-y-2'
+			method='POST'
+			data-netlify='true'
+			netlify-honeypot='got-ya'
+			action='/success'
+			name='subscribe'
+		>
+			<input type='hidden' name='form-name' value='subscribe' />
+			<p className='text-sm'>
+				Sign up to be notified when we publish new content!
+			</p>
+			<p className='hidden'>
+				<label>
+					Don't fill this in if you're human.{' '}
+					<input name='got-ya' {...register} />
+				</label>
+			</p>
+			<input
+				className='border p-2 w-full text-xs'
+				aria-label='email'
+				id='email'
+				name='email'
+				type='text'
+				autoComplete='email'
+				placeholder='Email address'
+				{...register('email')}
+				required
+			/>
+			<button className='bg-black text-white p-2 rounded' type='submit'>
+				Subscribe
+			</button>
+		</form>
 	)
 }
 
