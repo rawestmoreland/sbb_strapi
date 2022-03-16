@@ -8,7 +8,6 @@ const SubscribeForm = () => {
 		reset,
 	} = useForm()
 
-<<<<<<< Updated upstream
 	const encode = (data) => {
 		return Object.keys(data)
 			.map(
@@ -19,16 +18,6 @@ const SubscribeForm = () => {
 			)
 			.join('&')
 	}
-=======
-	const netlify = useNetlifyForm({
-		name: 'email-contact',
-		action: '/success',
-		honeypotName: 'bot-field',
-		onSuccess: (response, context) => {
-			console.log('Successfully sent form data to Netlify Server')
-		},
-	})
->>>>>>> Stashed changes
 
 	const onSubmit = (formData, e) => {
 		fetch('/', {
