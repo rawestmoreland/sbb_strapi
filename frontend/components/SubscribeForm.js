@@ -43,18 +43,17 @@ const SubscribeForm = () => {
 			onSubmit={handleSubmit(onSubmit)}
 			className='flex flex-col items-start gap-y-2'
 			data-netlify='true'
-			netlify-honeypot='got-ya'
 			name='subscribe'
 		>
 			<p className='text-sm'>
 				Sign up to be notified when we publish new content!
 			</p>
-			<p className='hidden'>
+			{/* <p className='hidden'>
 				<label>
 					Don't fill this in if you're human.{' '}
 					<input name='got-ya' {...register} />
 				</label>
-			</p>
+			</p> */}
 			<input
 				className='border p-2 w-full text-xs'
 				aria-label='email'
