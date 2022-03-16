@@ -15,7 +15,7 @@ const SubscribeForm = () => {
 	} = useForm()
 
 	const netlify = useNetlifyForm({
-		name: 'subscribe',
+		name: 'contact-form',
 		action: '/success',
 		honeypotName: 'bot-field',
 		onSuccess: (response, context) => {
