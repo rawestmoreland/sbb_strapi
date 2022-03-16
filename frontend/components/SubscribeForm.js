@@ -45,6 +45,7 @@ const SubscribeForm = () => {
 			method='POST'
 			data-netlify='true'
 			netlify-honeypot='got-ya'
+			action='/success/'
 			name='subscribe'
 		>
 			<input type='hidden' name='form-name' value='subscribe' />
