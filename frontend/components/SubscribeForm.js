@@ -52,21 +52,26 @@ const SubscribeForm = () => {
 			<p className='text-sm'>
 				Sign up to be notified when we publish new content!
 			</p>
-			<p className='hidden'>
-				<label>
-					Don't fill this in if you're human. <input type='got-ya' />
-				</label>
-			</p>
+			<label
+				htmlFor='got-ya'
+				style={{
+					position: 'absolute',
+					overflow: 'hidden',
+					clip: 'rect(0 0 0 0)',
+					height: '1px',
+					width: '1px',
+					margin: '-1px',
+					padding: '0',
+					border: '0',
+				}}
+			>
+				Don’t fill this out if you're human:
+				<input tabIndex='-1' name='got-ya' {...register} />
+			</label>
 			<input
 				className='border p-2 w-full text-xs'
-				aria-label='email'
-				id='email'
 				name='email'
-				type='text'
-				autoComplete='email'
-				placeholder='Email address'
 				{...register('email')}
-				required
 			/>
 			<button className='bg-black text-white p-2 rounded' type='submit'>
 				Subscribe
