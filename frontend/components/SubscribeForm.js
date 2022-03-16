@@ -42,13 +42,10 @@ const SubscribeForm = () => {
 		<form
 			onSubmit={handleSubmit(onSubmit)}
 			className='flex flex-col items-start gap-y-2'
-			method='POST'
 			data-netlify='true'
 			netlify-honeypot='got-ya'
-			action='/success'
 			name='subscribe'
 		>
-			<input type='hidden' name='form-name' value='subscribe' />
 			<p className='text-sm'>
 				Sign up to be notified when we publish new content!
 			</p>
@@ -61,13 +58,8 @@ const SubscribeForm = () => {
 			<input
 				className='border p-2 w-full text-xs'
 				aria-label='email'
-				id='email'
-				name='email'
-				type='text'
-				autoComplete='email'
 				placeholder='Email address'
 				{...register('email')}
-				required
 			/>
 			<button className='bg-black text-white p-2 rounded' type='submit'>
 				Subscribe
