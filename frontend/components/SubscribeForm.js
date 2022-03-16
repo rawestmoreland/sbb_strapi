@@ -1,33 +1,53 @@
-import { useState, createRef } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
+import { useForm } from 'react-hook-form'
 
 const SubscribeForm = () => {
-	const [email, setEmail] = useState('')
-	const handleChange = (e) => {
-		setEmail(e.target.value)
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+	} = useForm()
+
+	const encode = (data) => {
+		return Object.keys(data)
+			.map(
+				(key) =>
+					encodeURIComponent(key) +
+					'=' +
+					encodeURIComponent(data[key])
+			)
+			.join('&')
 	}
-	const handleSubmit = (form) => {
-		const data = new FormData('subscribe', 'newsletter')
+
+	const onSubmit = (formData, e) => {
 		fetch('/', {
 			method: 'POST',
-			body: data,
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: encode({
+				'form-name': 'subscribe',
+				...formData,
+			}),
 		})
 			.then(() => {
-				alert('Thanks! Check your email to confirm your email address.')
-				setEmail('')
+				alert('Check your inbox for your verification email')
+				reset()
 			})
-			.catch((error) => alert(error))
+			.catch((e) =>
+				alert('There was a problem with your submission. ' + e)
+			)
+		e.preventDefault()
 	}
 
 	return (
 		<form
+			onSubmit={handleSubmit(onSubmit)}
 			className='flex flex-col items-start gap-y-2'
-			name='subscribe'
 			method='POST'
 			data-netlify='true'
 			netlify-honeypot='got-ya'
-			onSubmit={handleSubmit}
+			name='subscribe'
 		>
+			<input type='hidden' name='form-name' value='subscribe' />
 			<p className='text-sm'>
 				Sign up to be notified when we publish new content!
 			</p>
@@ -42,10 +62,9 @@ const SubscribeForm = () => {
 				id='email'
 				name='email'
 				type='text'
-				value={email}
 				autoComplete='email'
 				placeholder='Email address'
-				onChange={handleChange}
+				{...register('email')}
 				required
 			/>
 			<button className='bg-black text-white p-2 rounded' type='submit'>
