@@ -1,33 +1,72 @@
-import { useState, createRef } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
+import { useReducer } from 'react'
+
+const initialValues = {
+	email: '',
+}
+
+const initialErrors = {
+	name: false,
+}
 
 const SubscribeForm = () => {
-	const [email, setEmail] = useState('')
+	const reducer = (currentState, nextState) => ({
+		...currentState,
+		...nextState,
+	})
+
+	const [values, setValues] = useReducer(reducer, initialValues)
+	const [errors, setErrors] = useReducer(reducer, initialErrors)
+
 	const handleChange = (e) => {
-		setEmail(e.target.value)
+		setValues({ [e.target.id]: e.target.value })
 	}
-	const handleSubmit = (form) => {
-		const data = new FormData(form)
-		data.append('subscribe', 'newsletter')
+
+	const onFocus = (e) => {
+		setErrors({ [e.target.id]: false })
+	}
+
+	const encode = (data) => {
+		return Object.keys(data)
+			.map(
+				(key) =>
+					encodeURIComponent(key) +
+					'=' +
+					encodeURIComponent(data[key])
+			)
+			.join('&')
+	}
+
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		for (const key in values) {
+			if (!values[key]) {
+				setErrors({ [key]: true })
+				return
+			}
+			setErrors({ [key]: false })
+		}
 		fetch('/', {
 			method: 'POST',
-			body: data,
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: encode({
+				'form-name': e.target.getAttribute('name'),
+				...values,
+			}),
 		})
-			.then(() => {
-				alert('Thanks! Check your email to confirm your email address.')
-				setEmail('')
-			})
-			.catch((error) => alert(error))
+			.then(() => alert('Check your inbox for your verification email'))
+			.catch((e) =>
+				alert('There was a problem with your submission. ' + e)
+			)
 	}
 
 	return (
 		<form
+			onSubmit={handleSubmit}
 			className='flex flex-col items-start gap-y-2'
-			name='subscribe'
 			method='POST'
 			data-netlify='true'
 			netlify-honeypot='got-ya'
-			onSubmit={handleSubmit}
+			name='subscribe'
 		>
 			<p className='text-sm'>
 				Sign up to be notified when we publish new content!
@@ -43,9 +82,10 @@ const SubscribeForm = () => {
 				id='email'
 				name='email'
 				type='text'
-				value={email}
+				value={values.email}
 				autoComplete='email'
 				placeholder='Email address'
+				onFocus={onFocus}
 				onChange={handleChange}
 				required
 			/>
