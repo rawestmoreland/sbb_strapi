@@ -1,7 +1,10 @@
 [build]
 	base = "frontend/"
 	publish = ".next"
-	command = "next build"
+	command = "npm run build"
+
+[functions]
+	directory = "./utils/functions"
 
 [functions]
 	directory = "./utils/functions"
