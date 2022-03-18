@@ -48,11 +48,10 @@ export default async function handler(req, res) {
 						'Content-Type': 'application/json',
 						'Authorization': `Bearer ${process.env.STRAPI_ADMIN_TOKEN}`,
 					},
+					body: JSON.stringify({ email }),
 				})
-					.then((response) => {
-						response.json()
-					})
-					.then((data) => console.log(data))
+					.then((response) => response.json())
+					.then((data) => console.log({ data }))
 				return res.status(200).json({ strapiResponse })
 			}
 
