@@ -1,5 +1,6 @@
 import Layout from '../../components/Layout'
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { getSBBURL } from '../../utils/api-helpers'
 
@@ -25,7 +26,6 @@ const ConfirmPage = () => {
 
 		if (data && data.activated) {
 			setActivated(true)
-			router.replace('/', `${requestUrl}`, { shallow: true })
 		}
 	}
 
@@ -38,6 +38,16 @@ const ConfirmPage = () => {
 			{!activated && !validating && (
 				<div className='w-full h-full flex items-center justify-center'>
 					😞 sorry, we were unable to verify your email 😞
+				</div>
+			)}
+			{activated && !validating && (
+				<div className='w-full h-full flex flex-col items-center justify-center gap-y-4'>
+					<span>🍻 thank you! you email has been verified 🍻</span>
+					<Link href='/'>
+						<span className='text-blue-400 cursor-pointer underline'>
+							check out the home page to browse posts
+						</span>
+					</Link>
 				</div>
 			)}
 		</Layout>
