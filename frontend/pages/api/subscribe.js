@@ -1,4 +1,4 @@
-const { strapiPostSubscribe } = require('../../utils/api-helpers')
+import fetch from 'node-fetch'
 
 export default async function handler(req, res) {
 	const { body, method } = req
@@ -8,24 +8,60 @@ export default async function handler(req, res) {
 
 	if (method === 'POST') {
 		// If email or captcha are missing return an error
-		if (!email) {
+		if (!email || !captcha) {
 			return res.status(422).json({
 				message:
 					'Unprocessable request, please provide the required fields',
 			})
 		}
 
-		const response = await strapiPostSubscribe(
-			'/subscribers',
-			{
-				method: 'POST',
-				body: JSON.stringify({ email }),
-			},
-			email
-		)
+		try {
+			// Ping the google recaptcha verify API to verify the captcha code you received
+			const response = await fetch(
+				`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${captcha}`,
+				{
+					headers: {
+						'Content-Type':
+							'application/x-www-form-urlencoded; charset=utf-8',
+					},
+					method: 'POST',
+				}
+			)
+			const captchaValidation = await response.json()
+			/**
+       * The structure of response from the veirfy API is
+       * {
+       *  "success": true|false,
+       *  "challenge_ts": timestamp,  // timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ)
+       *  "hostname": string,         // the hostname of the site where the reCAPTCHA was solved
+       *  "error-codes": [...]        // optional
+        }
+       */
+			if (captchaValidation.success) {
+				const strapiURL =
+					process.env.NEXT_PUBLIC_STRAPI_URL ||
+					'http://localhost:1337'
 
-		if (!response.error) {
-			return res.status(200).send(JSON.stringify(response))
+				const strapiResponse = await fetch(`${strapiURL}/subscribers`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${process.env.STRAPI_ADMIN_TOKEN}`,
+					},
+				})
+					.then((response) => {
+						response.json()
+					})
+					.then((data) => console.log(data))
+				return res.status(200).json({ strapiResponse })
+			}
+
+			return res.status(422).json({
+				message: 'Unproccesable request, Invalid captcha code',
+			})
+		} catch (error) {
+			console.log(error)
+			return res.status(422).json({ message: 'Something went wrong' })
 		}
 	}
 	// Return 404 if someone pings the API with a method other than

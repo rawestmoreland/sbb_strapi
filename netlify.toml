@@ -6,9 +6,6 @@
 [functions]
 	directory = "./utils/functions"
 
-[functions]
-	directory = "./utils/functions"
-
 [context.branch-deploy]
   command = "npm run noIndex"
 
