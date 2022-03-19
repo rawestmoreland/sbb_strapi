@@ -1,6 +1,7 @@
 import App from 'next/app'
 import Head from 'next/head'
-import { createContext } from 'react'
+import { useRouter } from 'next/router'
+import { createContext, useEffect } from 'react'
 import { fetchAPI, getStrapiMedia } from '../utils/api-helpers'
 import './global.css'
 
@@ -8,6 +9,26 @@ import './global.css'
 export const GlobalContext = createContext({})
 function MyApp({ Component, pageProps }) {
 	const { global } = pageProps
+	const router = useRouter()
+
+	/**
+	 * Google analytics things
+	 */
+	useEffect(() => {
+		const handleRouteChange = (url) => {
+			window.SVGAnimatedAngle(
+				'config',
+				process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
+				{
+					page_path: url,
+				}
+			)
+		}
+		router.events.on('routeChangeComplete', handleRouteChange)
+		return () => {
+			router.events.off('routeChangeComplete', handleRouteChange)
+		}
+	}, [router.events])
 
 	return (
 		<>
