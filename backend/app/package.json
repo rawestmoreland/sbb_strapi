@@ -10,6 +10,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "@strapi/codemods": "^1.0.2",
     "googleapis": "^95.0.0",
     "knex": "0.21.18",
     "nodemailer": "^6.7.2",
