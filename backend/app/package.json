@@ -1,45 +1,37 @@
 {
-  "name": "sbb_strapi_backend",
+  "name": "app",
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
+    "develop": "strapi develop",
     "dev": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi"
   },
+  "devDependencies": {},
   "dependencies": {
-    "@strapi/codemods": "^1.0.2",
-    "googleapis": "^95.0.0",
-    "knex": "0.21.18",
-    "nodemailer": "^6.7.2",
-    "pg": "^8.7.1",
-    "pg-connection-string": "^2.4.0",
-    "sqlite3": "5.0.0",
-    "strapi": "3.6.8",
-    "strapi-admin": "3.6.8",
-    "strapi-connector-bookshelf": "3.6.8",
-    "strapi-plugin-content-manager": "3.6.8",
-    "strapi-plugin-content-type-builder": "3.6.8",
-    "strapi-plugin-email": "^3.6.8",
-    "strapi-plugin-graphql": "^3.6.8",
-    "strapi-plugin-i18n": "3.6.8",
-    "strapi-plugin-upload": "3.6.8",
-    "strapi-plugin-users-permissions": "3.6.8",
-    "strapi-provider-email-gmail-oauth2": "^0.1.7",
-    "strapi-provider-upload-cloudinary": "^3.6.8",
-    "strapi-utils": "3.6.8"
+    "@strapi/plugin-graphql": "^4.1.5",
+    "@strapi/plugin-i18n": "4.1.5",
+    "@strapi/plugin-users-permissions": "4.1.5",
+    "@strapi/provider-upload-cloudinary": "^4.1.5",
+    "@strapi/strapi": "4.1.5",
+    "@strapi/utils": "^4.1.7",
+    "strapi-provider-email-gmail": "file:providers/strapi-provider-email-gmail",
+    "googleapis": "^100.0.0",
+    "nodemailer": "^6.7.3",
+    "pg": "8.6.0"
   },
   "author": {
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "a165a7ee-bdcd-4bef-9c37-b071991d07e6"
+    "uuid": "b9609148-f525-4e7a-af23-1fe14fc710fe"
   },
   "engines": {
-    "node": ">=10.16.0 <=14.x.x",
-    "npm": "^6.0.0"
+    "node": ">=12.x.x <=16.x.x",
+    "npm": ">=6.0.0"
   },
   "license": "MIT"
 }

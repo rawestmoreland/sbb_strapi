@@ -1,40 +1,33 @@
 module.exports = ({ env }) => ({
-  graphql: {
-    endpoint: "/graphql",
-    shadowCRUD: true,
-    playgroundAlways: true,
-    depthLimit: 7,
-    amountLimit: 100,
-    introspection: true,
-    apolloServer: {
-      tracing: false,
-    },
-  },
   upload: {
-    provider: "cloudinary",
-    providerOptions: {
-      cloud_name: env("CLOUDINARY_NAME"),
-      api_key: env("CLOUDINARY_KEY"),
-      api_secret: env("CLOUDINARY_SECRET"),
-    },
-    actionOptions: {
-      upload: {
-        folder: env("CLOUDINARY_FOLDER"),
+    config: {
+      provider: "cloudinary",
+      providerOptions: {
+        cloud_name: env("CLOUDINARY_NAME"),
+        api_key: env("CLOUDINARY_KEY"),
+        api_secret: env("CLOUDINARY_SECRET"),
       },
-      delete: {},
+      actionOptions: {
+        upload: {
+          folder: env("CLOUDINARY_FOLDER"),
+        },
+        delete: {},
+      },
     },
   },
   email: {
-    provider: "gmail-oauth2",
-    providerOptions: {
-      username: "smallbatchbru@gmail.com",
-      clientId: env("OAUTH_CLIENTID"),
-      clientSecret: env("OAUTH_CLIENT_SECRET"),
-      refreshToken: env("OAUTH_REFRESH_TOKEN"),
-    },
-    settings: {
-      defaultFrom: "smallbatchbru@gmail.com",
-      defaultReplyTo: "smallbatchbru@gmail.com",
+    config: {
+      provider: "strapi-provider-email-gmail",
+      providerOptions: {
+        userName: env("GMAIL_USERNAME"),
+        clientId: env("OAUTH_CLIENT_ID"),
+        clientSecret: env("OAUTH_CLIENT_SECRET"),
+        refreshToken: env("OAUTH_REFRESH_TOKEN"),
+      },
+      settings: {
+        defaultFrom: "smallbatchbru@gmail.com",
+        defaultReplyTo: "richard@smallbatchbru.com",
+      },
     },
   },
 });
