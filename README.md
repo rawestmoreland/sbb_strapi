@@ -16,6 +16,16 @@ I've decided to go with Strapi since it can be self-hosted.
 - Potentially move to Digital Ocean in the future if Heroku doesn't work out
 - cron.js runs every minute to publish posts with a published date in the past
 
+### Post content type
+
+- Lifecycle hooks for emailing the list of subscribers when a new article is published.
+
+### Subscriber content type
+
+- A list of subscribers.
+- Tokenize the email to base64 and use that in the URL param when they verify their email address.
+
 ## TODO
 
-- [ ] email subscribers when new post is published
+- [X] email subscribers when new post is published
+- [ ] migrate to Strapi v4.
