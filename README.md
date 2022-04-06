@@ -28,4 +28,8 @@ I've decided to go with Strapi since it can be self-hosted.
 ## TODO
 
 - [X] email subscribers when new post is published
-- [ ] migrate to Strapi v4.
+- [ ] migrate to Strapi v4
+
+## Wishlist / Experiments
+
+- [ ] Try DigitalOcean App instance with a postgres DB
