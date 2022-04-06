@@ -2,7 +2,7 @@ version: '3'
 services:
     sbb_postgres:
         container_name: sbb_postgres
-        image: postgres:13.3
+        image: postgres:14
         environment:
             POSTGRES_DB: strapi
             POSTGRES_USER: strapi
