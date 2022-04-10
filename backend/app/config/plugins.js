@@ -17,18 +17,16 @@ module.exports = ({ env }) => ({
   },
   email: {
     config: {
-      provider: env("EMAIL_PROVIDER"),
+      provider: "strapi-provider-email-gmail",
       providerOptions: {
-        host: env("EMAIL_SMTP_HOST"),
-        port: env("EMAILSMTP_PORT"),
-        auth: {
-          user: env("EMAIL_SMTP_USER"),
-          pass: env("EMAIL_SMTP_PASS"),
-        },
+        userName: env("GMAIL_USERNAME"),
+        clientId: env("OAUTH_CLIENT_ID"),
+        clientSecret: env("OAUTH_CLIENT_SECRET"),
+        refreshToken: env("OAUTH_REFRESH_TOKEN"),
       },
       settings: {
-        defaultFrom: env("EMAIL_ADDRESS_FROM"),
-        defaultReplyTo: env("EMAIL_ADDRESS_REPLY"),
+        defaultFrom: "smallbatchbru@gmail.com",
+        defaultReplyTo: "smallbatchbru@gmail.com",
       },
     },
   },
