@@ -1,5 +1,9 @@
 "use strict";
 
+const { getBaseURL } = require("../../../../utils/helpers");
+
+const baseURL = getBaseURL();
+
 /**
  * post service.
  */
