@@ -5,12 +5,12 @@ module.exports = {
     {
       method: "GET",
       path: "/confirm-subscription/:token",
-      handler: "custom-controller.confirm",
+      handler: "subscriber.confirmSub",
     },
     {
       method: "GET",
       path: "/cancel-subscription/:token",
-      handler: "custom-controller.cancel",
+      handler: "subscriber.cancelSub",
     },
   ],
 };
