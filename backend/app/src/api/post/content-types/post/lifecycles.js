@@ -14,7 +14,7 @@ module.exports = {
         .findMany({ where: { activated: true } });
       if (currentPublishedAt !== previousPublishedAt) {
         for (sub of subList) {
-          console.log(`Sneding an email to ${sub.email}`);
+          console.log(`Sending an email to ${sub.email}`);
         }
       }
     }
