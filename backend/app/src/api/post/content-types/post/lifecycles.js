@@ -14,7 +14,11 @@ module.exports = {
         .findMany({ where: { activated: true } });
       if (currentPublishedAt !== previousPublishedAt) {
         for (sub of subList) {
-          console.log(`Sending an email to ${sub.email}`);
+          await strapi.services.post.sendPost(
+            sub.email,
+            sub.token,
+            previousData
+          );
         }
       }
     }
