@@ -42,14 +42,17 @@ export default async function handler(req, res) {
 					process.env.NEXT_PUBLIC_STRAPI_URL ||
 					'http://localhost:1337'
 
-				const strapiResponse = await fetch(`${strapiURL}/subscribers`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						'Authorization': `Bearer ${process.env.STRAPI_ADMIN_TOKEN}`,
-					},
-					body: JSON.stringify({ email }),
-				})
+				const strapiResponse = await fetch(
+					`${strapiURL}/api/subscribers`,
+					{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': `Bearer ${process.env.STRAPI_API_TOKEN}`,
+						},
+						body: JSON.stringify({ email }),
+					}
+				)
 					.then((response) => response.json())
 					.then((data) => console.log({ data }))
 				return res.status(200).json({ strapiResponse })

@@ -17,16 +17,29 @@ module.exports = ({ env }) => ({
   },
   email: {
     config: {
-      provider: "strapi-provider-email-gmail",
+      provider: env("EMAIL_PROVIDER"),
       providerOptions: {
-        userName: env("GMAIL_USERNAME"),
-        clientId: env("OAUTH_CLIENT_ID"),
-        clientSecret: env("OAUTH_CLIENT_SECRET"),
-        refreshToken: env("OAUTH_REFRESH_TOKEN"),
+        host: env("EMAIL_SMTP_HOST"),
+        port: env("EMAIL_SMTP_PORT"),
+        auth: {
+          user: env("EMAIL_SMTP_USER"),
+          pass: env("EMAIL_SMTP_PASS"),
+        },
+        // username: env("GMAIL_USERNAME"),
+        // clientId: env("OAUTH_CLIENTID"),
+        // clientSecret: env("OAUTH_CLIENT_SECRET"),
+        // refreshToken: env("OAUTH_REFRESH_TOKEN"),
       },
       settings: {
-        defaultFrom: "smallbatchbru@gmail.com",
-        defaultReplyTo: "smallbatchbru@gmail.com",
+        defaultFrom: "richard@smallbatchbru.com",
+        defaultReplyTo: "richard@smallbatchbru.com",
+      },
+    },
+  },
+  "users-permissions": {
+    config: {
+      jwt: {
+        expiresIn: "7d",
       },
     },
   },

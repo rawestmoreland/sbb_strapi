@@ -1,5 +1,5 @@
 {
-  "name": "strapi-provider-email-gmail-oauth2",
+  "name": "strapi-provider-email-gmail",
   "version": "0.1.0",
   "description": "An email provider for gmail using oauth2",
   "main": "index.js",

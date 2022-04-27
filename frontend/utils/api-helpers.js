@@ -1,7 +1,7 @@
 // Get the url of the Strapi API based om the env variable or the default local one.
 export function getStrapiURL(path) {
 	return `${
-		process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'
+		process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1338'
 	}${path}`
 }
 
@@ -56,7 +56,7 @@ export async function strapiPostSubscribe(path, options = {}, email = '') {
 	const defaultOptions = {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': `Bearer ${process.env.STRAPI_ADMIN_TOKEN}`,
+			'Authorization': `Bearer ${process.env.STRAPI_API_TOKEN}`,
 		},
 	}
 	const mergedOptions = {
@@ -117,7 +117,7 @@ export async function fetchAPIAuth(path, options = {}) {
 	const defaultOptions = {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': `Bearer ${process.env.STRAPI_ADMIN_TOKEN}`,
+			'Authorization': `Bearer ${process.env.STRAPI_API_TOKEN}`,
 		},
 	}
 	const mergedOptions = {
