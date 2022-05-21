@@ -1,6 +1,6 @@
 require('dotenv').config()
 const fetch = require('node-fetch')
-const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'
+const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1338'
 const { STRAPI_API_TOKEN } = process.env
 
 exports.handler = (event) => {

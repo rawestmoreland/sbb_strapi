@@ -61,7 +61,8 @@ function MyApp({ Component, pageProps }) {
 
 MyApp.getInitialProps = async (ctx) => {
 	const appProps = await App.getInitialProps(ctx)
-	const global = await fetchAPI('/global')
+	const global = await fetchAPI('/api/global')
+	console.log(global)
 	return { ...appProps, pageProps: { global } }
 }
 

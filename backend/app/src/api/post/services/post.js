@@ -59,7 +59,7 @@ module.exports = createCoreService("api::post.post", ({ strapi }) => ({
         </div>`,
       });
     } catch (error) {
-      console.log(error[0].messages);
+      console.warn(error[0].messages);
     }
   },
 }));

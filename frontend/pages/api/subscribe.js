@@ -40,7 +40,7 @@ export default async function handler(req, res) {
 			if (captchaValidation.success) {
 				const strapiURL =
 					process.env.NEXT_PUBLIC_STRAPI_URL ||
-					'http://localhost:1337'
+					'http://localhost:1338'
 
 				const strapiResponse = await fetch(
 					`${strapiURL}/api/subscribers`,

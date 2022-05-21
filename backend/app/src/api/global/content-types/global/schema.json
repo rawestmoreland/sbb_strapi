@@ -13,7 +13,9 @@
   "pluginOptions": {},
   "attributes": {
     "metaTitleSuffix": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "default": "Bru Blog"
     },
     "favicon": {
       "type": "media",
@@ -23,21 +25,19 @@
         "images"
       ]
     },
-    "siteName": {
-      "type": "string",
-      "required": true
-    },
     "metadata": {
-      "displayName": "metadata",
       "type": "component",
       "repeatable": false,
       "component": "shared.metadata"
     },
-    "NavBar": {
-      "displayName": "navbar",
+    "navbar": {
       "type": "component",
       "repeatable": false,
       "component": "layout.navbar"
+    },
+    "siteName": {
+      "type": "string",
+      "default": "Small Batch Bru"
     }
   }
 }
