@@ -16,3 +16,6 @@ presigned-url:
 db-to-heroku:
 	$(eval PRESIGNED_URL=$(shell aws s3 presign s3://strapi-sbb/db-backups/sbb.dump --endpoint-url=https://$(SBB_BUCKET_URL)))
 	heroku pg:backups:restore '$(PRESIGNED_URL)' DATABASE_URL -a strapi-sbb
+
+heroku-staging-push:
+	git push heroku-staging staging:master
