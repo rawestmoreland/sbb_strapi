@@ -1,40 +1,46 @@
 module.exports = ({ env }) => ({
-  graphql: {
-    endpoint: "/graphql",
-    shadowCRUD: true,
-    playgroundAlways: true,
-    depthLimit: 7,
-    amountLimit: 100,
-    introspection: true,
-    apolloServer: {
-      tracing: false,
-    },
-  },
   upload: {
-    provider: "cloudinary",
-    providerOptions: {
-      cloud_name: env("CLOUDINARY_NAME"),
-      api_key: env("CLOUDINARY_KEY"),
-      api_secret: env("CLOUDINARY_SECRET"),
-    },
-    actionOptions: {
-      upload: {
-        folder: env("CLOUDINARY_FOLDER"),
+    config: {
+      provider: "cloudinary",
+      providerOptions: {
+        cloud_name: env("CLOUDINARY_NAME"),
+        api_key: env("CLOUDINARY_KEY"),
+        api_secret: env("CLOUDINARY_SECRET"),
       },
-      delete: {},
+      actionOptions: {
+        upload: {
+          folder: env("CLOUDINARY_FOLDER"),
+        },
+        delete: {},
+      },
     },
   },
   email: {
-    provider: "gmail-oauth2",
-    providerOptions: {
-      username: "smallbatchbru@gmail.com",
-      clientId: env("OAUTH_CLIENTID"),
-      clientSecret: env("OAUTH_CLIENT_SECRET"),
-      refreshToken: env("OAUTH_REFRESH_TOKEN"),
+    config: {
+      provider: env("EMAIL_PROVIDER"),
+      providerOptions: {
+        host: env("EMAIL_SMTP_HOST"),
+        port: env("EMAIL_SMTP_PORT"),
+        auth: {
+          user: env("EMAIL_SMTP_USER"),
+          pass: env("EMAIL_SMTP_PASS"),
+        },
+        // username: env("GMAIL_USERNAME"),
+        // clientId: env("OAUTH_CLIENTID"),
+        // clientSecret: env("OAUTH_CLIENT_SECRET"),
+        // refreshToken: env("OAUTH_REFRESH_TOKEN"),
+      },
+      settings: {
+        defaultFrom: "richard@smallbatchbru.com",
+        defaultReplyTo: "richard@smallbatchbru.com",
+      },
     },
-    settings: {
-      defaultFrom: "smallbatchbru@gmail.com",
-      defaultReplyTo: "smallbatchbru@gmail.com",
+  },
+  "users-permissions": {
+    config: {
+      jwt: {
+        expiresIn: "7d",
+      },
     },
   },
 });

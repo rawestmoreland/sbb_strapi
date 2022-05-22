@@ -8,7 +8,7 @@ const PostPreview = ({ post }) => {
 		<Link as={`post/${post.slug}`} href='/post/[id]'>
 			<div className='md:grid md:grid-cols-3 w-full md:gap-x-8 cursor-pointer'>
 				<div className='md:col-span-1 w-full h-full mb-2'>
-					<Image media={image} />
+					<Image media={image.data.attributes} />
 				</div>
 				<div className='flex flex-col col-span-2 h-full'>
 					<h2 className='text-2xl font-bold mb-4'>{post.title}</h2>

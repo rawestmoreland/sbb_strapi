@@ -1,0 +1,13 @@
+{
+  "name": "strapi-provider-email-gmail",
+  "version": "0.1.0",
+  "description": "An email provider for gmail using oauth2",
+  "main": "index.js",
+  "author": "Richard Westmoreland",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@strapi/utils": "^4.1.7",
+    "nodemailer": "^6.7.3"
+  }
+}

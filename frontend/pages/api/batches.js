@@ -11,7 +11,6 @@ export default async function handler(req, res) {
 		const cachedDataNext = await redis.get(`batches${page + 1}`)
 
 		if (cachedData) {
-			console.log('Returning cached data')
 			if (cachedDataNext) {
 				more = true
 			} else if (JSON.parse(cachedData).length === limit) {
@@ -56,8 +55,6 @@ export default async function handler(req, res) {
 		}
 
 		redis.set(`batches${page}`, JSON.stringify(batches), 'EX', 1800)
-
-		console.log('Returning fresh data')
 
 		// Return the batches and a boolean of whether there
 		// are more pages.

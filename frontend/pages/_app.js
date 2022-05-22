@@ -11,6 +11,7 @@ import './global.css'
 export const GlobalContext = createContext({})
 function MyApp({ Component, pageProps }) {
 	const { global } = pageProps
+	const { favicon } = global.attributes
 	const router = useRouter()
 
 	/**
@@ -47,12 +48,9 @@ function MyApp({ Component, pageProps }) {
 				}}
 			/>
 			<Head>
-				<link
-					rel='shortcut icon'
-					href={getStrapiMedia(global.favicon.url)}
-				/>
+				<link rel='shortcut icon' href={getStrapiMedia(favicon)} />
 			</Head>
-			<GlobalContext.Provider value={global}>
+			<GlobalContext.Provider value={global.attributes}>
 				<Component {...pageProps} />
 			</GlobalContext.Provider>
 		</>
@@ -61,8 +59,18 @@ function MyApp({ Component, pageProps }) {
 
 MyApp.getInitialProps = async (ctx) => {
 	const appProps = await App.getInitialProps(ctx)
-	const global = await fetchAPI('/global')
-	return { ...appProps, pageProps: { global } }
+	const global = await fetchAPI(
+		'/global',
+		{},
+		{
+			populate: {
+				favicon: { populate: '*' },
+				metadata: { populate: '*' },
+				navbar: { populate: '*' },
+			},
+		}
+	)
+	return { ...appProps, pageProps: { global: global.data } }
 }
 
 export default MyApp
