@@ -18,7 +18,7 @@ const Seo = ({ seo }) => {
 				? siteName + ' | ' + seoWithDefaults.metaDescription
 				: seoWithDefaults.metaTitle + ' | ' + siteName
 		}`,
-		shareImage: seoWithDefaults.shareImage || null,
+		shareImage: seoWithDefaults.shareImage.data.attributes || null,
 	}
 
 	return (
@@ -31,17 +31,27 @@ const Seo = ({ seo }) => {
 				description: fullSeo.metaDescription || '',
 				// Only include OG image if we have it
 				// Careful: if you disable image optimization in Strapi, this will break
-				...(fullSeo.shareImage && {
-					images: Object.values(fullSeo.shareImage.formats).map(
-						(image) => {
-							return {
-								url: getStrapiMedia(image.url),
-								width: image.width,
-								height: image.height,
-							}
-						}
-					),
-				}),
+				...(fullSeo.shareImage && fullSeo.shareImage.formats
+					? {
+							images: Object.values(
+								fullSeo.shareImage.formats
+							).map((image) => {
+								return {
+									url: getStrapiMedia(image.url),
+									width: image.width,
+									height: image.height,
+								}
+							}),
+					  }
+					: {
+							images: [
+								{
+									url: fullSeo.shareImage.url,
+									width: fullSeo.shareImage.width,
+									height: fullSeo.shareImage.height,
+								},
+							],
+					  }),
 			}}
 			// Only included Twitter data if we have it
 			twitter={{

@@ -2,41 +2,66 @@ import { gql } from 'graphql-tag'
 
 export const GET_POST_BY_SLUG = gql`
 	query GetPostsBySlug($slug: String) {
-		posts(where: { slug: $slug }) {
-			title
-			content
-			description
-			published
-			author {
-				name
-			}
-			image {
-				height
-				width
-				formats
-				alternativeText
-				url
+		posts(filters: { slug: { eq: $slug } }) {
+			data {
+				atrributes {
+					title
+					content
+					description
+					published
+					author {
+						data {
+							attributes {
+								name
+							}
+						}
+					}
+					image {
+						data {
+							attributes {
+								height
+								width
+								formats
+								alternativeText
+								url
+							}
+						}
+					}
+				}
 			}
 		}
 	}
 `
 
 export const GET_POSTS = gql`
+	# Write your query or mutation here
 	query GetPosts {
 		posts(sort: "published:desc") {
-			title
-			content
-			description
-			published
-			author {
-				name
-			}
-			image {
-				height
-				width
-				formats
-				alternativeText
-				url
+			data {
+				attributes {
+					title
+					content
+					description
+					published
+					authors {
+						data {
+							attributes {
+								name
+							}
+						}
+					}
+					image {
+						data {
+							attributes {
+								height
+								width
+								formats
+								alternativeText
+								url
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -45,11 +70,18 @@ export const GET_POSTS = gql`
 export const GET_CATEGORIES = gql`
 	query GetCategories {
 		categories {
-			name
-			slug
-			posts {
-				id
-				title
+			data {
+				attributes {
+					name
+					slug
+					posts {
+						data {
+							attributes {
+								title
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -58,44 +90,72 @@ export const GET_CATEGORIES = gql`
 export const GET_ALL_THINGS = gql`
 	query GetAllThings {
 		posts(sort: "published:desc") {
-			id
-			title
-			content
-			description
-			author {
-				name
-			}
-			published
-			slug
-			image {
-				width
-				height
-				url
-				formats
+			data {
+				id
+				attributes {
+					title
+					content
+					description
+					authors {
+						data {
+							attributes {
+								name
+							}
+						}
+					}
+					published
+					slug
+					image {
+						data {
+							attributes {
+								width
+								height
+								url
+								formats
+							}
+						}
+					}
+				}
 			}
 		}
 		categories {
-			id
-			name
-			posts {
+			data {
 				id
-				title
+				attributes {
+					name
+					posts {
+						data {
+							id
+							attributes {
+								title
+							}
+						}
+					}
+				}
 			}
 		}
 		homepage {
-			hero {
-				title
-			}
-			seo {
-				metaTitle
-				metaDescription
-				twitterUsername
-				twitterCardType
-				shareImage {
-					formats
-					height
-					width
-					url
+			data {
+				attributes {
+					Hero {
+						title
+					}
+					seo {
+						metaTitle
+						metaDescription
+						twitterUsername
+						twitterCardType
+						shareImage {
+							data {
+								attributes {
+									formats
+									height
+									width
+									url
+								}
+							}
+						}
+					}
 				}
 			}
 		}

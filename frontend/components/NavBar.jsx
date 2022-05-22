@@ -5,7 +5,7 @@ import { MdMenu } from 'react-icons/md'
 import MobileMenu from './MobileMenu'
 
 const NavBar = ({ navbar }) => {
-	const { title, links } = navbar
+	const { title, link } = navbar
 	const [showMobileMenu, setShowMobileMenu] = useState(false)
 	return (
 		<nav className='sticky top-0 flex items-center justify-center w-screen h-16 px-2 md:px-6 bg-white border-b z-50'>
@@ -18,13 +18,13 @@ const NavBar = ({ navbar }) => {
 					</Link>
 				</div>
 				{/* Links for desktop */}
-				{links.length > 0 && (
+				{link.length > 0 && (
 					<ul className='hidden md:flex items-center justify-center flex-row tracking-wide'>
-						{links.map((link) => (
-							<li key={link.id}>
-								<NavLink link={link}>
+						{link.map((l) => (
+							<li key={l.id}>
+								<NavLink link={l}>
 									<div className='mx-4 hover:text-gray-500'>
-										{link.text}
+										{l.text}
 									</div>
 								</NavLink>
 							</li>
