@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { getSBBURL } from '../../utils/api-helpers'
 
 const ConfirmPage = () => {
-	const router = useRouter()
 	const { query } = useRouter()
 	const [activated, setActivated] = useState(false)
 	const [validating, setValidating] = useState(true)
@@ -31,6 +30,7 @@ const ConfirmPage = () => {
 
 	useEffect(() => {
 		verifyEmail(query.token)
+		return () => {}
 	}, [])
 
 	return (

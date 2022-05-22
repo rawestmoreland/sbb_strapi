@@ -9,7 +9,7 @@ const PostList = ({ posts }) => {
 						// Only display if published date is in the past.
 
 						<li key={post.id}>
-							<PostPreview post={post} />
+							<PostPreview post={post.attributes} />
 						</li>
 					)
 				})}

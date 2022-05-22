@@ -8,7 +8,7 @@ import { fetchLastReading } from '../utils/api-helpers'
 export default function Home({ posts, categories, homepage, batchData }) {
 	return (
 		<Layout batchData={batchData}>
-			<Seo seo={homepage.seo} />
+			<Seo seo={homepage.data.attributes.seo} />
 			<div className='flex flex-col'>
 				<PostList posts={posts} />
 			</div>
@@ -26,7 +26,7 @@ export async function getServerSideProps() {
 
 	return {
 		props: {
-			posts: data.posts,
+			posts: data.posts.data,
 			categories: data.categories,
 			homepage: data.homepage,
 			batchData,
