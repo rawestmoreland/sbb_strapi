@@ -80,6 +80,7 @@ db
 *#
 ssl
 .idea
+*.dump
 nbproject
 public/uploads/*
 !public/uploads/.gitkeep
