@@ -48,7 +48,6 @@ export default async function handler(req, res) {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
-							'Authorization': `Bearer ${process.env.STRAPI_API_TOKEN}`,
 						},
 						body: JSON.stringify({ data: { email } }),
 					}
