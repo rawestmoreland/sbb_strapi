@@ -1,54 +1,22 @@
-import Image from 'next/image'
-import PropTypes from 'prop-types'
-import { getStrapiMedia } from '../utils/api-helpers'
+import NextImage from 'next/image'
 
-const NextImage = ({ media, ...props }) => {
-	const { url, alternativeText } = media
+const Image = ({ media, ...props }) => {
+	const { url, alternativeText, width, height } = media.data.attributes
 
-	const loader = ({ src }) => {
-		return getStrapiMedia(src)
-	}
-
-	if (props.width && props.height) {
-		return (
-			<Image
-				loader={loader}
-				src={url}
-				alt={alternativeText || ''}
-				width={props.width}
-				height={props.height}
-			/>
-		)
-	}
-
-	if (url.startsWith('https://res.cloudinary.com')) {
-		return (
-			<Image
-				layout='responsive'
-				width={media.width}
-				height={media.height}
-				objectFit='contain'
-				src={url}
-				alt={alternativeText || ''}
-			/>
-		)
-	}
-
+	// const loader = ({ src }) => {
+	// 	return getStrapiMedia(src)
+	// }
 	return (
-		<Image
-			loader={loader}
+		<NextImage
+			// loader={loader()}
 			layout='responsive'
-			width={media.width}
-			height={media.height}
 			objectFit='contain'
 			src={url}
 			alt={alternativeText || ''}
+			width={width}
+			height={height}
 		/>
 	)
 }
 
-Image.propTypes = {
-	className: PropTypes.string,
-}
-
-export default NextImage
+export default Image

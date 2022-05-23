@@ -1,20 +1,16 @@
 import ReactMarkdown from 'react-markdown'
-import { format } from 'date-fns'
 import client from '../../lib/apollo-client'
 import gql from 'graphql-tag'
 import { GET_POST_BY_SLUG } from '../../utils/graphql-queries'
-import { fetchAPI, getStrapiMedia } from '../../utils/api-helpers'
 import Layout from '../../components/Layout'
 import Image from '../../components/Image'
 import Seo from '../../components/Seo'
 
 const Post = ({ post }) => {
-	const imageUrl = getStrapiMedia(post.image.url)
-
 	const seo = {
-		metaTitle: post.title,
-		metaDescription: post.description,
-		shareImage: post.image,
+		metaTitle: post.attributes.title,
+		metaDescription: post.attributes.description,
+		shareImage: post.attributes.image,
 		article: true,
 	}
 
@@ -22,13 +18,13 @@ const Post = ({ post }) => {
 		<Layout>
 			<Seo seo={seo} />
 			<div className='postContent'>
-				<Image media={post.image} />
+				<Image media={post.attributes.image} />
 				<h1>{post.title}</h1>
 				<div className='my-4 text-gray-600'>
-					<em>{`Author: ${post.author.name}`}</em>
+					<em>{`Author: ${post.attributes.authors.data[0].attributes.name}`}</em>
 				</div>
 				<hr className='mb-6' />
-				<ReactMarkdown children={post.content} />
+				<ReactMarkdown children={post.attributes.content} />
 			</div>
 		</Layout>
 	)
@@ -40,19 +36,28 @@ export async function getStaticPaths() {
 	const { data } = await client.query({
 		query: gql`
 			query {
-				posts {
-					slug
+				posts(
+					sort: "published:desc"
+					pagination: { page: 1, pageSize: 100 }
+				) {
+					data {
+						attributes {
+							slug
+						}
+					}
 				}
 			}
 		`,
 	})
 
 	return {
-		paths: data.posts.map((post) => ({
-			params: {
-				slug: post.slug,
-			},
-		})),
+		paths: data.posts.data.map((post) => {
+			return {
+				params: {
+					slug: post.attributes.slug,
+				},
+			}
+		}),
 		fallback: false,
 	}
 }
@@ -66,7 +71,7 @@ export async function getStaticProps({ params }) {
 	})
 
 	return {
-		props: { post: data.posts[0] },
+		props: { post: data.posts.data[0] },
 		revalidate: 1,
 	}
 }

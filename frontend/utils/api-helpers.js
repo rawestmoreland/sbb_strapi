@@ -143,8 +143,8 @@ export async function fetchAPIAuth(path, options = {}) {
 }
 
 // This function will get the url of your medias depending on where they are hosted
-export function getStrapiMedia(media) {
-	const { url } = media.data.attributes
+export function getStrapiMedia(mediaUrl) {
+	const { url } = mediaUrl
 	if (url == null) {
 		return null
 	}

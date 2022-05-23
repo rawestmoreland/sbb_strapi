@@ -17,7 +17,6 @@ async function main() {
       // console.log(`Updating ${post.id}`);
       post.content = lodash.trimEnd(post.content, "\n");
       if (post.id === 31) {
-        console.log(post.content);
         await fetch(`http://localhost:1338/api/posts/${post.id}`, {
           method: "PUT",
           headers: {

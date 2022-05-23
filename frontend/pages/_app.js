@@ -48,7 +48,10 @@ function MyApp({ Component, pageProps }) {
 				}}
 			/>
 			<Head>
-				<link rel='shortcut icon' href={getStrapiMedia(favicon)} />
+				<link
+					rel='shortcut icon'
+					href={getStrapiMedia(favicon.data.attributes.url)}
+				/>
 			</Head>
 			<GlobalContext.Provider value={global.attributes}>
 				<Component {...pageProps} />
