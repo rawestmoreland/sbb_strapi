@@ -4,12 +4,12 @@ export const GET_POST_BY_SLUG = gql`
 	query GetPostsBySlug($slug: String) {
 		posts(filters: { slug: { eq: $slug } }) {
 			data {
-				atrributes {
+				attributes {
 					title
 					content
 					description
 					published
-					author {
+					authors {
 						data {
 							attributes {
 								name
@@ -89,7 +89,7 @@ export const GET_CATEGORIES = gql`
 
 export const GET_ALL_THINGS = gql`
 	query GetAllThings {
-		posts(sort: "published:desc") {
+		posts(sort: "published:desc", pagination: { page: 1, pageSize: 100 }) {
 			data {
 				id
 				attributes {

@@ -4,11 +4,12 @@ import { format } from 'date-fns'
 
 const PostPreview = ({ post }) => {
 	const { image } = post
+	console.log(image)
 	return (
 		<Link as={`post/${post.slug}`} href='/post/[id]'>
 			<div className='md:grid md:grid-cols-3 w-full md:gap-x-8 cursor-pointer'>
 				<div className='md:col-span-1 w-full h-full mb-2'>
-					<Image media={image.data.attributes} />
+					<Image media={image} height={200} width={200} />
 				</div>
 				<div className='flex flex-col col-span-2 h-full'>
 					<h2 className='text-2xl font-bold mb-4'>{post.title}</h2>
