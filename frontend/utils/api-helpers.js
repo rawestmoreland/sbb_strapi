@@ -126,7 +126,7 @@ export async function fetchAPIAuth(path, options = {}) {
 	const defaultOptions = {
 		headers: {
 			'content-type': 'application/json',
-			Authorization: `Bearer ${process.env.NEXT_STRAPI_ADMIN_TOKEN}`,
+			Authorization: `bearer 7dc0cc858829725de017c8cc8827ce865549d46ca116db0cae6d25d72fd597fe4debdfccc01b06f9b57dd6e2f78c0854f9ddd6777f658dcb62609ac2dc582c838861e9d0d3077e63259bd57282c6d0524f6ec399e0b622e37d8b53d32245be82281068f9897130a7f1d99a256a6f1788a5ef941d20c7a405d2080daf50b28c2b.eyJpZCI6MiwiaWF0IjoxNjQ3MTA0NTY1LCJleHAiOjE2NDk2OTY1NjV9.rw1cbjcwhxtQgU9auZVDVAhuJb_hkGCUU2Mg5XGrNiI`,
 		},
 	}
 	const mergedOptions = {
