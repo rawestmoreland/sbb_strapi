@@ -4,7 +4,6 @@ import { format } from 'date-fns'
 
 const PostPreview = ({ post }) => {
 	const { image } = post
-	console.log(image)
 	return (
 		<Link as={`post/${post.slug}`} href='/post/[id]'>
 			<div className='md:grid md:grid-cols-3 w-full md:gap-x-8 cursor-pointer'>

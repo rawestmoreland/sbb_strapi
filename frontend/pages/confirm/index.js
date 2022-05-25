@@ -21,9 +21,6 @@ const ConfirmPage = () => {
 		})
 		const { data } = await res.json()
 
-		console.log(res)
-		console.log(data)
-
 		setValidating(false)
 
 		if (data && data.activated) {
