@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "admin_stuffs",
+  "info": {
+    "singularName": "admin-stuff",
+    "pluralName": "admin-stuffs",
+    "displayName": "AdminStuff"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "isAdmin": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
