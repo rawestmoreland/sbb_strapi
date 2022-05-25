@@ -1,7 +1,6 @@
 require('dotenv').config()
 const fetch = require('node-fetch')
 const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1338'
-const { STRAPI_API_TOKEN } = process.env
 
 exports.handler = (event) => {
 	// Pulling out the payload from the body
@@ -15,7 +14,7 @@ exports.handler = (event) => {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json',
-				'Authorization': `Bearer ${STRAPI_API_TOKEN}`,
+				'Authorization': `Bearer ${process.env.STRAPI_API_TOKEN}`,
 			},
 			body: JSON.stringify({ email }),
 		}).then((response) => response.json())
