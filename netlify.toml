@@ -9,7 +9,13 @@
 [context.branch-deploy]
   command = "npm run noIndex"
 
+[context.staging]
+	command = "npm run noIndex"
+
+
 [[plugins]]
 	package = "@netlify/plugin-nextjs"
 [[plugins]]
-	package = "/plugins/netlify-plugin-env-var-by-context"
+	package = 'netlify-plugin-contextual-env'
+  [plugins.inputs]
+  mode = 'prefix'
