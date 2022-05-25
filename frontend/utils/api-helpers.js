@@ -136,8 +136,6 @@ export async function fetchAPIAuth(path, options = {}) {
 	const requestUrl = getStrapiURL(path)
 	const response = await fetch(requestUrl, mergedOptions)
 
-	console.log(response)
-
 	if (!response.ok) {
 		throw new Error(`An error occured please try again`)
 	}
