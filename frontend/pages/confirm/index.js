@@ -12,12 +12,12 @@ const ConfirmPage = () => {
 		const requestUrl = getSBBURL()
 		const res = await fetch(`${requestUrl}/api/verifyemail`, {
 			method: 'POST',
+			headers: {
+				'Content-type': 'application/json',
+			},
 			body: JSON.stringify({
 				token,
 			}),
-			headers: {
-				'Content-type': 'application/json; charset=UTF-8',
-			},
 		})
 		const { data } = await res.json()
 
