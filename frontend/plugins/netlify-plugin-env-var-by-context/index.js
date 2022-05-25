@@ -1,5 +1,8 @@
 module.exports = {
 	onPreBuild: async ({ inputs }) => {
+		console.log(process.env.CONTEXT)
+		console.log(process.env.BRANCH)
+
 		const context = process.env.CONTEXT.toUpperCase().replace(/-/g, '_')
 		Object.keys(process.env).forEach((key) => {
 			const envVar = `${context}_${key}`
