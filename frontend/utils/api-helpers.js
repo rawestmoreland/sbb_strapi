@@ -122,11 +122,10 @@ export async function fetchAPI(path, options = {}, urlParamsObject = {}) {
 
 // Helper to make GET requests to Strapi with Bearer token
 export async function fetchAPIAuth(path, options = {}) {
-	console.log(process.env.STRAPI_ADMIN_TOKEN)
 	const defaultOptions = {
 		headers: {
 			'content-type': 'application/json',
-			Authorization: `bearer ${process.env.STRAPI_ADMIN_TOKEN}`,
+			Authorization: `bearer ${process.env.STRAPI_API_TOKEN}`,
 		},
 	}
 	const mergedOptions = {
