@@ -23,3 +23,12 @@ db-to-heroku-prod:
 
 heroku-staging-push:
 	git push heroku-staging staging:master
+
+import-heroku-vars-stage:
+	heroku config -s -a strapi-sbb > envvars.txt
+
+import-heroku-vars-prod:
+	heroku config -s -a strapi-sbb-prod > envvars.txt
+
+copy-vars:
+	cat envvars.txt | tr '\n' ' ' | xargs heroku config:set -a strapi-sbb-prod
