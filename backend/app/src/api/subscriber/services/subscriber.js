@@ -18,8 +18,8 @@ module.exports = createCoreService(
       try {
         await strapi.plugins["email"].services.email.send({
           to: email,
-          from: "smallbatchbru@gmail.com",
-          replyTo: "smallbatchbru@gmail.com",
+          from: "richard@smallbatchbru.com",
+          replyTo: "richard@smallbatchbru.com",
           subject: "Confirm your email for smallbatchbru.com",
           text: `${baseURL}/confirm?token=${token}`,
           html: `
