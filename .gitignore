@@ -85,6 +85,7 @@ envvars.txt
 nbproject
 public/uploads/*
 !public/uploads/.gitkeep
+.git.bfg-report/
 
 ############################
 # Node.js
