@@ -80,6 +80,7 @@ db
 *#
 ssl
 .idea
+envvars.txt
 *.dump
 nbproject
 public/uploads/*
