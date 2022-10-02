@@ -1,13 +1,13 @@
 version: '3'
 services:
-    sbb_postgres:
-        container_name: sbb_postgres
-        image: postgres:13.3
-        environment:
-            POSTGRES_DB: strapi
-            POSTGRES_USER: strapi
-            POSTGRES_PASSWORD: strapi
-        ports:
-            - '5433:5432'
-        volumes:
-            - ./backend/db:/var/lib/postgresql/data
+  sbb_postgres:
+    container_name: sbb_postgres
+    image: postgres:14.0
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi
+    ports:
+      - '5433:5432'
+    volumes:
+      - ./backend/db:/var/lib/postgresql/data

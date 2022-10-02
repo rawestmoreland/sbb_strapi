@@ -2,6 +2,8 @@
 	base = "frontend/"
 	publish = ".next"
 	command = "npm run build"
+  [build]
+   ignore = "/bin/false"
 
 [functions]
 	directory = "./utils/functions"
