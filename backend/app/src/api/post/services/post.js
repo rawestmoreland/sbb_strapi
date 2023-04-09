@@ -38,12 +38,14 @@ module.exports = createCoreService("api::post.post", ({ strapi }) => ({
                 <h3>
                   ${post.title}
                 </h3>
-                <span>by: ${post.author.name}</span>
+                ${post.author?.name && `<span>by: ${post.author.name}</span>`}
               </td>
             </tr>
             <tr>
               <td>
-                <a style="text-decoration:none;" href="${baseURL}/post/${post.slug}">
+                <a style="text-decoration:none;" href="${baseURL}/post/${
+          post.slug
+        }">
                   <p>
                     ${post.description}
                   </p>
@@ -59,7 +61,7 @@ module.exports = createCoreService("api::post.post", ({ strapi }) => ({
         </div>`,
       });
     } catch (error) {
-      console.warn(error[0].messages);
+      console.warn(error);
     }
   },
 }));
