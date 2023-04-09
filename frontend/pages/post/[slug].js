@@ -7,7 +7,6 @@ import Image from '../../components/Image';
 import Seo from '../../components/Seo';
 
 const Post = ({ post }) => {
-  console.log(post);
   const seo = {
     metaTitle: post.attributes.title,
     metaDescription: post.attributes.description,
