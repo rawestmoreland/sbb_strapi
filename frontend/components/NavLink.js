@@ -5,10 +5,10 @@ export default function NavLink({ link, children }) {
 
 	if (isInternalLink) {
 		return (
-			<Link href='/[[...slug]]' as={link.url}>
-				<a>{children}</a>
+            <Link href='/[[...slug]]' as={link.url}>
+				{children}
 			</Link>
-		)
+        );
 	}
 
 	if (link.newTab) {

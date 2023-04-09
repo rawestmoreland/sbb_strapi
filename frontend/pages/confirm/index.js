@@ -34,7 +34,7 @@ const ConfirmPage = () => {
 	}, [])
 
 	return (
-		<Layout>
+        <Layout>
 			{!activated && !validating && (
 				<div className='w-full h-full flex items-center justify-center'>
 					😞 sorry, we were unable to verify your email 😞
@@ -43,7 +43,7 @@ const ConfirmPage = () => {
 			{activated && !validating && (
 				<div className='w-full h-full flex flex-col items-center justify-center gap-y-4'>
 					<span>🍻 thank you! you email has been verified 🍻</span>
-					<Link href='/'>
+					<Link href='/' legacyBehavior>
 						<span className='text-blue-400 cursor-pointer underline'>
 							check out the home page to browse posts
 						</span>
@@ -51,7 +51,7 @@ const ConfirmPage = () => {
 				</div>
 			)}
 		</Layout>
-	)
+    );
 }
 
 export default ConfirmPage
