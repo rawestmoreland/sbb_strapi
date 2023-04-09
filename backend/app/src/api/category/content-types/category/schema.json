@@ -21,11 +21,11 @@
       "targetField": "name",
       "required": true
     },
-    "posts": {
+    "post": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "api::post.post",
-      "mappedBy": "categories"
+      "inversedBy": "categories"
     }
   }
 }

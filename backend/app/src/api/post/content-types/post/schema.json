@@ -45,17 +45,17 @@
       "type": "boolean",
       "default": false
     },
-    "categories": {
+    "author": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::category.category",
-      "inversedBy": "posts"
-    },
-    "authors": {
-      "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "api::author.author",
       "inversedBy": "posts"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category",
+      "mappedBy": "post"
     }
   }
 }

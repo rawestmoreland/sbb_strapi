@@ -30,9 +30,9 @@
     },
     "posts": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToMany",
       "target": "api::post.post",
-      "inversedBy": "authors"
+      "mappedBy": "author"
     }
   }
 }
