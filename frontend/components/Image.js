@@ -1,4 +1,4 @@
-import NextImage from 'next/image'
+import NextImage from "next/legacy/image"
 
 const Image = ({ media, ...props }) => {
 	const { url, alternativeText, width, height } = media.data.attributes
