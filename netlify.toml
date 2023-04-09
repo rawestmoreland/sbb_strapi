@@ -12,11 +12,3 @@
 
 [context.staging]
 	command = "npm run noIndex"
-
-
-[[plugins]]
-	package = "@netlify/plugin-nextjs"
-[[plugins]]
-	package = 'netlify-plugin-contextual-env'
-  [plugins.inputs]
-  mode = 'prefix'
