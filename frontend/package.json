@@ -8,9 +8,7 @@
     "noIndex": "npm run build && echo 'User-agent: *\nDisallow: /' > public/robots.txt",
     "build": "next build",
     "export": "next export",
-    "start": "next start",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "start": "next start"
   },
   "dependencies": {
     "@apollo/client": "^3.7.11",
@@ -43,6 +41,7 @@
     "@babel/core": "^7.15.8",
     "autoprefixer": "^10.2.6",
     "babel-loader": "^8.2.3",
+    "netlify-cli": "^13.2.2",
     "postcss": "^8.3.5"
   }
 }
