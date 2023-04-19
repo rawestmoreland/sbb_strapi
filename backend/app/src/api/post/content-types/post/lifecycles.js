@@ -6,7 +6,7 @@ module.exports = {
       const { id } = params.where;
       const previousData = await strapi.db
         .query("api::post.post")
-        .findOne({ where: { id } });
+        .findOne({ where: { id }, populate: true });
       const previousPublishedAt = previousData.publishedAt;
       const currentPublishedAt = data.pubslishedAt;
       const subList = await strapi.db
