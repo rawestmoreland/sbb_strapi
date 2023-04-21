@@ -1,6 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import client from '../../lib/apollo-client';
 import gql from 'graphql-tag';
+import rehypeRaw from 'rehype-raw';
 import { GET_POST_BY_SLUG } from '../../utils/graphql-queries';
 import Layout from '../../components/Layout';
 import Image from '../../components/Image';
@@ -17,7 +18,7 @@ const Post = ({ post }) => {
   return (
     <Layout>
       <Seo seo={seo} />
-      <div className='postContent'>
+      <div>
         <Image media={post.attributes.image} />
         <h1>{post.title}</h1>
         <div className='my-4 text-gray-600'>
@@ -26,7 +27,11 @@ const Post = ({ post }) => {
           )}
         </div>
         <hr className='mb-6' />
-        <ReactMarkdown children={post.attributes.content} />
+        <ReactMarkdown
+          rehypePlugins={[rehypeRaw]}
+          className='prose max-w-none font-rubik text-cod-gray'
+          children={post.attributes.content}
+        />
       </div>
     </Layout>
   );
