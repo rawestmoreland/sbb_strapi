@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { createContext, useEffect } from 'react';
 import { fetchAPI, getStrapiMedia } from '../utils/api-helpers';
 import * as gtag from '../lib/gtag';
-import './global.css';
+import '../styles/global.css';
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({});
