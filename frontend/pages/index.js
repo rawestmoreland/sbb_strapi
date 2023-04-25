@@ -8,6 +8,9 @@ import { fetchLastReading } from '../utils/api-helpers';
 export default function Home({ posts, categories, homepage, batchData }) {
   return (
     <Layout batchData={batchData}>
+      <Head>
+        <link rel='canonical' href='https://www.smallbatchbru.com/' />
+      </Head>
       <Seo seo={homepage.data.attributes.seo} />
       <div className='flex flex-col'>
         <PostList posts={posts} />
