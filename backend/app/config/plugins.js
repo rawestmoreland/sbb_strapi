@@ -55,4 +55,20 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  "netlify-deployments": {
+    enabled: true,
+    config: {
+      accessToken: env("NETLIFY_STRAPI_PLUGIN_TOKEN"),
+      sites: [
+        {
+          name: "SBB Blog",
+          id: env("NETLIFY_SITE_ID"),
+          buildHook: `https://api.netlify.com/build_hooks/${env(
+            "NETLIFY_BUILD_HOOK_ID"
+          )}`,
+          branch: "production",
+        },
+      ],
+    },
+  },
 });
