@@ -1,5 +1,6 @@
 import Layout from '../../components/Layout';
 import BatchTable from '../../components/BatchTable';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 const BatchList = ({ batches, page, more }) => {

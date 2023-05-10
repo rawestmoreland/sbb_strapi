@@ -1,6 +1,7 @@
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import PostList from '../components/PostList';
+import Head from 'next/head';
 import client from '../lib/apollo-client';
 import { GET_ALL_THINGS } from '../utils/graphql-queries';
 import { fetchLastReading } from '../utils/api-helpers';
