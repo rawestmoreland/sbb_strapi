@@ -29,7 +29,7 @@ const Post = ({ post }) => {
         <hr className='mb-6' />
         <ReactMarkdown
           rehypePlugins={[rehypeRaw]}
-          className='prose max-w-none font-rubik text-cod-gray'
+          className='font-rubik text-cod-gray prose max-w-none'
           children={post.attributes.content}
         />
       </div>
@@ -38,8 +38,6 @@ const Post = ({ post }) => {
 };
 
 export async function getStaticPaths() {
-  // const posts = await fetchAPI('/posts')
-
   const { data } = await client.query({
     query: gql`
       query {
