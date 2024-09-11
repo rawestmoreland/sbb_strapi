@@ -1,24 +1,27 @@
 {
   "name": "app",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "description": "A Strapi application",
+  "license": "MIT",
+  "author": {
+    "name": "A Strapi developer"
+  },
   "scripts": {
-    "develop": "strapi develop",
-    "dev": "strapi develop",
-    "start": "strapi start",
     "build": "strapi build",
+    "dev": "strapi develop",
+    "develop": "strapi develop",
+    "start": "strapi start",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
-    "@strapi/plugin-graphql": "^4.9.0",
-    "@strapi/plugin-i18n": "4.9.0",
-    "@strapi/plugin-users-permissions": "^4.9.0",
-    "@strapi/provider-email-nodemailer": "^4.9.0",
-    "@strapi/provider-upload-cloudinary": "^4.9.0",
-    "@strapi/strapi": "^4.9.0",
-    "@strapi/utils": "^4.9.0",
+    "@strapi/plugin-graphql": "^4.25.9",
+    "@strapi/plugin-i18n": "4.25.9",
+    "@strapi/plugin-users-permissions": "^4.25.9",
+    "@strapi/provider-email-nodemailer": "^4.25.9",
+    "@strapi/provider-upload-cloudinary": "^4.25.9",
+    "@strapi/strapi": "^4.25.9",
+    "@strapi/utils": "^4.25.9",
     "dotenv": "^16.0.1",
     "googleapis": "^100.0.0",
     "jsonwebtoken": "^8.5.1",
@@ -27,17 +30,18 @@
     "nodemailer": "^6.7.3",
     "pg": "^8.7.3",
     "pg-connection-string": "^2.5.0",
-    "sharp": "^0.32.0",
-    "strapi-plugin-netlify-deployments": "^2.0.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^5.2.0",
+    "sharp": "^0.33.5",
+    "strapi-plugin-netlify-deployments": "^2.0.0",
+    "styled-components": "^5.2.1"
   },
-  "author": {
-    "name": "A Strapi developer"
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.x.x <=20.x.x"
   },
   "strapi": {
     "uuid": "b9609148-f525-4e7a-af23-1fe14fc710fe"
-  },
-  "engines": {
-    "node": ">=14.x.x <=16.x.x"
-  },
-  "license": "MIT"
+  }
 }

@@ -1,0 +1,14 @@
+app = "sbb-strapi"
+primary_region = "mad"
+
+[http_service]
+auto_start_machines = true
+auto_stop_machines = true
+force_https = true
+internal_port = 1337
+min_machines_running = 0
+processes = [ "app" ]
+
+[[vm]]
+memory = "2GB"
+size = "shared-cpu-1x"
